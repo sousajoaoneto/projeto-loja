@@ -4,8 +4,19 @@
 <%@ include file="../template/header.jsp" %>
 
     <main class="home">
-        <section id="banner-top">
-            <div class="container"></div>
+        <section id="banner-top" style="padding:100px">
+            <div class="container">
+	            <h4 style="color:#f00">
+	            <c:choose>
+					<c:when test="${userSession.isLogged()}">
+						Olá ${userSession.usuario.getEmail()}
+					</c:when>
+					<c:otherwise>
+						Não tem user
+					</c:otherwise>
+				</c:choose>
+				</h4>   
+            </div>
         </section>
         <section id="watches">
             <div class="item silver">prata</div>

@@ -32,14 +32,11 @@ public class LoginController {
 		if(usuario.getEmail().equalsIgnoreCase("mail@mail.com")){
 			userSession.setUsuario(usuario);
 			result.include("userSession", userSession);
-			result.forwardTo(IndexController.class).index();
-			
+			result.redirectTo(IndexController.class).index();			
 		}else{
-		
-			result.redirectTo(this).form();
-			
+			result.include("msg", "Usuário ou Senha errados");
+			result.redirectTo(this).form();		
 		}
-		System.out.println(usuario.toString());
 	}
 	
 	@Public

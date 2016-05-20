@@ -8,8 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Clientes - Lista</title>
-<link href="../bootstrap/css/bootstrap.css" rel="stylesheet"/>
-<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/theme/css/bootstrap.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/theme/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>	
 	<div class="container" style="padding-top:50px">

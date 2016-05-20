@@ -14,18 +14,16 @@
     <script src="${pageContext.request.contextPath}/theme/js/jquery.min.js"></script>
 </head>
 <body>
-	<!-- GET USER FROM SESSION -->
-	<c:set var="user" scope="session" value="${userSession}"/>
     <header>
         <div class="container">
             <div class="nav-options pull-right">
-                <ul class="nav">
+                <ul class="nav nav-right">
                     <li><a href="#"><img src="${pageContext.request.contextPath}/theme/images/icon-shop.png" /></a></li>
                     
                     <c:choose>
-						<c:when test="${user ne null}">
-							<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>                  
-                    		<li><a href="#"><img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a></li>
+						<c:when test="${userSession.isLogged()}">
+							<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>                
+                    		
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.request.contextPath}/cadastrar">Cadastrar-se</a></li>
@@ -52,7 +50,15 @@
 		                        </form>
 		                    </li>			
 						</c:otherwise>
-					</c:choose>                    
+					</c:choose>
+					<li class="dropdown">
+						<a href="#" id="user-nav"><img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
+						<ul class="user-nav-options" style="display:none">
+							<li><a href="#">Ver perfil</a></li>
+							<li><a href="#">Meus Pedidos</a></li>
+							<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>
+						</ul>
+					</li>                 
                 </ul>
             </div>
 

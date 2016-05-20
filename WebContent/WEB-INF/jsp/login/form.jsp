@@ -10,6 +10,9 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
                 <h2>Entrar</h2>
+                <c:if test="${msg ne null}">
+                	<div class="alert alert-info">${msg}</div>
+                </c:if>
                 <form class="form-horizontal light" action="autenticar" method="post">
                     <div class="form-group has-feedback">
                         <div class="col-sm-12">

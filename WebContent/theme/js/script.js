@@ -61,13 +61,39 @@ $(window).ready(function(){
             $(this).toggleClass("mini")
         }
     });
-
+    
+    /*
     $(window).on("click",function(e) {
         var el = e.target, target = $(el).attr("id");
         if (target == "login"){
             $("#login").toggleClass("active");
             formLogin.toggleClass("show");
         }
+        if (target == "user-nav"){
+            $("#user-nav a").toggleClass("active");
+            $(".user-nav-options").toggleClass("show");
+        }
+    });
+    */
+    
+    //CHANGE THIS CODE
+    $("#login").on("click",function(e) {
+    	$("ul>li").not(this).find("a").removeClass("active");
+    	$("#login").toggleClass("active");
+    	formLogin.toggleClass("show");
+    	$("show").not(this).removeClass("show");
+    });
+    // CHANGE THIS CODE
+    $("#user-nav").on("click",function(e) {
+    	$("ul>li").not(this).find("a").removeClass("active");
+    	$(this).toggleClass("active");
+    	if($(this).hasClass("active")){
+    		$(this).find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o-w.png");
+    	}else{
+    		$(this).find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+    	}
+        $(".user-nav-options").toggleClass("show");
+        $("show").not(this).removeClass("show");
     });
 	
 	$('input[class=cep]').on('blur',function(){
