@@ -50,6 +50,7 @@ $(window).ready(function(){
         }else{
             $("footer").fadeOut();
         }
+        //$(".show").removeClass("show");
     });
     $(window).resize(function(){
 
@@ -61,42 +62,56 @@ $(window).ready(function(){
             $(this).toggleClass("mini")
         }
     });
-    
+
     /*
-    $(window).on("click",function(e) {
-        var el = e.target, target = $(el).attr("id");
-        if (target == "login"){
-            $("#login").toggleClass("active");
-            formLogin.toggleClass("show");
-        }
-        if (target == "user-nav"){
-            $("#user-nav a").toggleClass("active");
-            $(".user-nav-options").toggleClass("show");
-        }
+     $(window).on("click",function(e) {
+     var el = e.target, target = $(el).attr("id");
+     if (target == "login"){
+     $("#login").toggleClass("active");
+     formLogin.toggleClass("show");
+     }
+     if (target == "user-nav"){
+     $("#user-nav a").toggleClass("active");
+     $(".user-nav-options").toggleClass("show");
+     }
+     });
+     */
+
+    //MENU
+    //CHANGE THIS CODE
+    $(".shop").on("click",function(e) {
+        e.preventDefault();
+        $("ul>li>a").removeClass("active");
+        $("#cart").toggleClass("show");
+        $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        $(".show").not("#cart").removeClass("show");
     });
-    */
-    
     //CHANGE THIS CODE
     $("#login").on("click",function(e) {
-    	$("ul>li").not(this).find("a").removeClass("active");
-    	$("#login").toggleClass("active");
-    	formLogin.toggleClass("show");
-    	$("show").not(this).removeClass("show");
+        e.preventDefault();
+        $("ul>li>a").not(this).removeClass("active");
+        $("#login").toggleClass("active");
+        formLogin.toggleClass("show");
+        $(".show").not(formLogin).removeClass("show");
+        $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
     });
     // CHANGE THIS CODE
     $("#user-nav").on("click",function(e) {
-    	$("ul>li").not(this).find("a").removeClass("active");
-    	$(this).toggleClass("active");
-    	if($(this).hasClass("active")){
-    		$(this).find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o-w.png");
-    	}else{
-    		$(this).find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
-    	}
+        e.preventDefault();
+        $("ul>li>a").not("#user-nav").removeClass("active");
+
+        $("#user-nav").toggleClass("active");
+
+        if($("#user-nav").hasClass("active")){
+            $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o-w.png");
+        }else{
+            $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        }
         $(".user-nav-options").toggleClass("show");
-        $("show").not(this).removeClass("show");
+        $(".show").not(".user-nav-options").removeClass("show");
     });
-	
-	$('input[class=cep]').on('blur',function(){
+
+    $('input[class=cep]').on('blur',function(){
         var cep = $jq(this).val();
         console.log(cep);
         $.get('http://viacep.com.br/ws/'+cep+'/json', function(data){
@@ -114,14 +129,11 @@ $(window).ready(function(){
             $('input[name=cep]').attr('style','border-color:#C9302C;color:#C9302C');
             console.log("Falha na coneção");
         });
-        /*
-         $('output[name=logradouro]').innerText = res.logradouro;
-         $('output[name=complemento]').innerText = res.complemento;
-         $('output[name=bairro]').innerText = res.bairro;
-         $('output[name=localidade]').innerText = res.localidade;
-         $('output[name=uf]').innerText = res.uf;
-         */
+    });
+
+    //cart
+    $('#cart').on('click','a.remove',function(){
+        $(this).closest('.item').css('background','#FF5454').fadeOut();
     });
 
 });
-

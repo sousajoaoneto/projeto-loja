@@ -16,14 +16,20 @@
 <body>
     <header>
         <div class="container">
-            <div class="nav-options pull-right">
-                <ul class="nav nav-right">
-                    <li><a href="#"><img src="${pageContext.request.contextPath}/theme/images/icon-shop.png" /></a></li>
-                    
+            <div class="nav-options pull-right">            
+                <ul class="nav nav-right">                    
                     <c:choose>
 						<c:when test="${userSession.isLogged()}">
-							<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>                
-                    		
+							<li class="dropdown">
+								<a href="#" id="user-nav"><img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
+								<ul class="user-nav-options" style="display:none">
+									<li><a href="#">Ver perfil</a></li>
+									<li><a href="#">Meus Pedidos</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Cadastrar Produto</a></li>
+									<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>
+								</ul>
+							</li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.request.contextPath}/cadastrar">Cadastrar-se</a></li>
@@ -51,14 +57,7 @@
 		                    </li>			
 						</c:otherwise>
 					</c:choose>
-					<li class="dropdown">
-						<a href="#" id="user-nav"><img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
-						<ul class="user-nav-options" style="display:none">
-							<li><a href="#">Ver perfil</a></li>
-							<li><a href="#">Meus Pedidos</a></li>
-							<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>
-						</ul>
-					</li>                 
+					<li><a href="#" id="shop" class="shop"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>		      
                 </ul>
             </div>
 
@@ -69,7 +68,7 @@
             <nav class="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="${pageContext.request.contextPath}">HOME</a></li>
-                    <li><a href="#">Catálogo</a></li>
+                    <li><a href="${pageContext.request.contextPath}/catalogo">Catálogo</a></li>
                     <li><a href="#">Categorias</a></li>
                     <li><a href="#">Sobre Nós</a></li>
                 </ul>
