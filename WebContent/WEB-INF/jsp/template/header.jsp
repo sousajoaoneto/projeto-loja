@@ -21,7 +21,7 @@
                     <c:choose>
 						<c:when test="${userSession.isLogged()}">
 							<li class="dropdown">
-								<a href="#" id="user-nav"><img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
+								<a href="#" id="user-nav">${userSession.usuario.getNome()} <img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
 								<ul class="user-nav-options" style="display:none">
 									<li><a href="#">Ver perfil</a></li>
 									<li><a href="#">Meus Pedidos</a></li>
@@ -38,13 +38,13 @@
 		                        <form class="form-horizontal login" action="autenticar" method="post" style="display:none">
 		                            <div class="form-group has-feedback">
 		                                <div class="col-sm-12">
-		                                    <input type="email" class="form-control" id="email" name="usuario.email" placeholder="Email">
+		                                    <input type="email" class="form-control" id="email" name="usuario.email" placeholder="Email" required />
 		                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		                                </div>
 		                            </div>
 		                            <div class="form-group has-feedback">
 		                                <div class="col-sm-12">
-		                                    <input type="password" class="form-control" id="password" name="usuario.senha" placeholder="Senha">
+		                                    <input type="password" class="form-control" id="password" name="usuario.senha" placeholder="Senha" required />
 		                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		                                </div>
 		                            </div>

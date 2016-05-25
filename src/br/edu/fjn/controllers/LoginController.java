@@ -30,6 +30,7 @@ public class LoginController {
 	public void auth(Usuario usuario){
 		//fa autencicação
 		if(usuario.getEmail().equalsIgnoreCase("mail@mail.com")){
+			usuario.setNome("Tester");
 			userSession.setUsuario(usuario);
 			result.include("userSession", userSession);
 			result.redirectTo(IndexController.class).index();			

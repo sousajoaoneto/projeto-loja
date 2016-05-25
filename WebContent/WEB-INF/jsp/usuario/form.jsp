@@ -18,31 +18,35 @@
                             </div>
                         </div>
                         <div class="form-group has-feedback">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="address" name="usuario.endereco" placeholder="Endereço" required />
-                                <span class="glyphicon glyphicon-road form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="form-group has-feedback">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="cpf" name="usuario.cpf" placeholder="CPF" required />
                                 <span class="glyphicon glyphicon-hand-left form-control-feedback"></span>
                             </div>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="birth" name="usuario.data_nasc" placeholder="CPF" required />
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="birth" name="usuario.data_nasc" placeholder="Data NAscimento" required />
                                 <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             </div>
                         </div>
                         <div class="form-group has-feedback">
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="address" name="endereco.rua" placeholder="Endereço" required />
+                                <span class="glyphicon glyphicon-road form-control-feedback"></span>
+                            </div>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control cep" id="cep" name="usuario.cep" placeholder="CEP" required />
+                                <input type="text" class="form-control" id="address_number" name="endereco.numero" placeholder="Número" required />
+                                <span class="glyphicon glyphicon-road form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control cep" id="cep" name="cidade.cep" placeholder="CEP" required />
                             </div>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control uf" placeholder="UF" disabled>
-                                <input type="hidden" class="form-control" id="state" name="usuario.uf" required />
+                                <input type="hidden" class="form-control" id="state" name="estado.nome" required />
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control cidade" id="city" placeholder="Cidade" name="usuario.cidade" required />
+                                <input type="text" class="form-control cidade" id="city" placeholder="Cidade" name="cidade.nome" required />
                                 <span class="glyphicon glyphicon-globe form-control-feedback"></span>
                             </div>
                         </div>
