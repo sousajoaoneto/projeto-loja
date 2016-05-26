@@ -28,11 +28,11 @@ public class LoginController {
 	@Public
 	@Post("autenticar")
 	public void auth(Usuario usuario){
+		System.out.println("chegou");
 		//fa autencicação
 		if(usuario.getEmail().equalsIgnoreCase("mail@mail.com")){
 			usuario.setNome("Tester");
 			userSession.setUsuario(usuario);
-			result.include("userSession", userSession);
 			result.redirectTo(IndexController.class).index();			
 		}else{
 			result.include("msg", "Usuário ou Senha errados");

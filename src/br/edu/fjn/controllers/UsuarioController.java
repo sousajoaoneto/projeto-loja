@@ -30,6 +30,9 @@ public class UsuarioController {
 	@Public
 	@Post("salvar")//maybe this line can be removed
 	public void save(Usuario usuario){
+		
+		//colocaria o dao
+		result.redirectTo(IndexController.class).index();
 		System.out.println(usuario.toString());
 	}
 	

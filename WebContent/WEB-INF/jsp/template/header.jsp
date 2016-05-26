@@ -69,7 +69,6 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="${pageContext.request.contextPath}">HOME</a></li>
                     <li><a href="${pageContext.request.contextPath}/catalogo">Catálogo</a></li>
-                    <li><a href="#">Categorias</a></li>
                     <li><a href="#">Sobre Nós</a></li>
                 </ul>
             </nav>

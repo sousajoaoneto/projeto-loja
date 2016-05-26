@@ -3,10 +3,12 @@ package br.edu.fjn.components;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 import br.edu.fjn.model.Usuario;
 
 @SessionScoped
+@Named("userSession")
 public class UserSession implements Serializable{
 	private Usuario usuario;
 

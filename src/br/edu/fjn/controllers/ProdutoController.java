@@ -22,6 +22,12 @@ public class ProdutoController {
 	@Public
 	@Get("catalogo")
 	public void list(){
-		
+		//dao de usuario
 	}
+
+	@Get("editar/{codigo}")
+	public void edit(int codigo){
+		System.out.println("Chegou" + 1);
+	}
+	
 }
