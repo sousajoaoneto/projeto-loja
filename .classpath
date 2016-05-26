@@ -29,5 +29,10 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/weld-core.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/weld-servlet-core.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/weld-spi.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-c3p0-4.3.6.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-commons-annotations-4.0.5.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-core-4.3.6.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-entitymanager-4.3.6.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
