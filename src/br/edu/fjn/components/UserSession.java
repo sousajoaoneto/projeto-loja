@@ -5,7 +5,8 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.edu.fjn.model.Usuario;
+import br.edu.fjn.jpa.model.usuario.Usuario;
+
 
 @SessionScoped
 @Named("userSession")

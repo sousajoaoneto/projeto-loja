@@ -1,5 +1,7 @@
 package br.edu.fjn.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -8,7 +10,8 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.edu.fjn.annotations.Public;
 import br.edu.fjn.components.UserSession;
-import br.edu.fjn.model.Usuario;
+import br.edu.fjn.jpa.dao.impl.DaoUsuario;
+import br.edu.fjn.jpa.model.usuario.Usuario;
 
 @Controller
 public class LoginController {
@@ -28,7 +31,14 @@ public class LoginController {
 	@Public
 	@Post("autenticar")
 	public void auth(Usuario usuario){
+		List<Usuario> usuarios = new DaoUsuario().listar();
+		
+		for(int i=0;i<usuarios.size();i++){
+			System.out.println(usuarios.get(i).getNome());
+		}
+		
 		System.out.println("chegou");
+		
 		//fa autencicação
 		if(usuario.getEmail().equalsIgnoreCase("mail@mail.com")){
 			usuario.setNome("Tester");

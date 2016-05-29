@@ -8,6 +8,7 @@ import br.edu.fjn.dao.util.FabricaDeConexao;
 import br.edu.fjn.jpa.dao.interf.DaoInterfaceUsuario;
 import br.edu.fjn.jpa.model.usuario.Usuario;
 
+
 public class DaoUsuario implements DaoInterfaceUsuario {
 
 	EntityManager entityManager = FabricaDeConexao.getManager();
@@ -61,7 +62,7 @@ public class DaoUsuario implements DaoInterfaceUsuario {
 	public List<Usuario> listar() {
 		List<Usuario> usuarios = null;
 		try {
-			usuarios = entityManager.createNamedQuery("from Usuario", Usuario.class).getResultList();
+			usuarios = entityManager.createNamedQuery("select from tb_usuario", Usuario.class).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
