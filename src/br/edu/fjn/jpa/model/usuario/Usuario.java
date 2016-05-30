@@ -47,18 +47,6 @@ public class Usuario {
 
 	}
 
-	public Integer getId_usuario() {
-		return id_usuario;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -114,5 +102,25 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Integer getId_usuario() {
+		return id_usuario;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id_usuario=" + id_usuario + ", nome=" + nome + ", username=" + username + ", senha=" + senha
+				+ ", cpf=" + cpf + ", tipo=" + tipo + ", data_nasc=" + data_nasc + ", email=" + email + ", endereco="
+				+ endereco + "]";
+	}
+	
 
 }

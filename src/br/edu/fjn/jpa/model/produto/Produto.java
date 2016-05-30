@@ -35,8 +35,11 @@ public class Produto {
 	@JoinColumn(nullable=false, name="modelo_fk")
 	@OneToOne(cascade = CascadeType.ALL) //verificar o cascade
 	private Modelo modelo;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL) //verificar o cascade
 	private List<Cor> cor;
+	
+	private String imagem;
+	
 	public Produto() {
 	
 	}
@@ -100,7 +103,88 @@ public class Produto {
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
-	
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
+		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
+		result = prime * result + ((id_produto == null) ? 0 : id_produto.hashCode());
+		result = prime * result + ((imagem == null) ? 0 : imagem.hashCode());
+		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
+		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
+		result = prime * result + ((tecnologia == null) ? 0 : tecnologia.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (cor == null) {
+			if (other.cor != null)
+				return false;
+		} else if (!cor.equals(other.cor))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (estoque == null) {
+			if (other.estoque != null)
+				return false;
+		} else if (!estoque.equals(other.estoque))
+			return false;
+		if (genero != other.genero)
+			return false;
+		if (id_produto == null) {
+			if (other.id_produto != null)
+				return false;
+		} else if (!id_produto.equals(other.id_produto))
+			return false;
+		if (imagem == null) {
+			if (other.imagem != null)
+				return false;
+		} else if (!imagem.equals(other.imagem))
+			return false;
+		if (modelo == null) {
+			if (other.modelo != null)
+				return false;
+		} else if (!modelo.equals(other.modelo))
+			return false;
+		if (preco == null) {
+			if (other.preco != null)
+				return false;
+		} else if (!preco.equals(other.preco))
+			return false;
+		if (tecnologia != other.tecnologia)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id_produto=" + id_produto + ", estoque=" + estoque + ", descricao=" + descricao + ", preco="
+				+ preco + ", tecnologia=" + tecnologia + ", genero=" + genero + ", modelo=" + modelo + ", cor=" + cor
+				+ ", imagem=" + imagem + "]";
+	}	
 	
 	
 }

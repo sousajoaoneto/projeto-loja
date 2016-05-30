@@ -1,12 +1,20 @@
 package br.edu.fjn.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.edu.fjn.annotations.Public;
+import br.edu.fjn.jpa.dao.impl.DaoProduto;
+import br.edu.fjn.jpa.model.produto.Cor;
+import br.edu.fjn.jpa.model.produto.Modelo;
+import br.edu.fjn.jpa.model.produto.Produto;
 
 @Controller
 @Path("produto")
@@ -19,10 +27,28 @@ public class ProdutoController {
 		
 	}
 	
+	@Get("salvar")
+	public void save(){	
+		result.redirectTo(this).list();		
+	}
+	
+	@Post("salvar")
+	public void save(Produto produto, Modelo modelo, Cor cor){
+		List<Cor> cores = new ArrayList<>();
+		cores.add(cor);
+		produto.setCor(cores);
+		produto.setModelo(modelo);
+		
+		new DaoProduto().salvar(produto);
+		
+		result.redirectTo(this).list();		
+	}	
+	
 	@Public
 	@Get("catalogo")
 	public void list(){
-		//dao de usuario
+		List<Produto> produtos = new DaoProduto().listar();		
+		result.include("produtos", produtos);
 	}
 
 	@Get("editar/{codigo}")

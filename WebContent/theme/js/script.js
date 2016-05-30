@@ -27,8 +27,11 @@ function cpfValidate(strCPF) {
 }
 
 $(window).ready(function(){
-    var scrollPosition = $(window).scrollTop(), documentHeight = $(document).height(),windowHeight = $(window).height();
-    var formLogin = $('form.login');
+	var scrollPosition = $(window).scrollTop();
+    var documentHeight = $(document).height();
+    var windowWidth = $(window).width(), windowHeight = $(window).height();
+    var formLogin = $('form.login'), popup = $(".popup"), popupWidth = "",popupHeight="",popupMarginTop="";
+
 
     if( windowHeight < 567 ){
         $("footer").fadeIn();
@@ -52,8 +55,21 @@ $(window).ready(function(){
         }
         //$(".show").removeClass("show");
     });
-    $(window).resize(function(){
 
+    popupWidth = windowWidth * 0.6;
+    popupHeight = windowHeight * 0.7;
+    popupMarginTop = windowHeight * 0.15;
+    popup.width(popupWidth).height(popupHeight).css("margin-top",popupMarginTop);
+
+    $(window).resize(function(){
+        scrollPosition = $(window).scrollTop();
+        documentHeight = $(document).height();
+        windowWidth = $(window).width(), windowHeight = $(window).height();
+
+        popupWidth = windowWidth * 0.6;
+        popupHeight = windowHeight * 0.7;
+        popupMarginTop = windowHeight * 0.15;
+        popup.width(popupWidth).height(popupHeight).css("margin-top",popupMarginTop);
     });
 
     //toogle header if mini
@@ -61,6 +77,11 @@ $(window).ready(function(){
         if($(window).scrollTop() > 60){
             $(this).toggleClass("mini")
         }
+    });
+    
+    $(".overlay").on("click",function(e) {
+        $(".show").fadeOut().removeClass("show");
+        $(this).fadeOut();
     });
 
     /*
@@ -81,6 +102,7 @@ $(window).ready(function(){
     //CHANGE THIS CODE
     $(".shop").on("click",function(e) {
         e.preventDefault();
+        $('.overlay').fadeOut();
         $("ul>li>a").removeClass("active");
         $("#cart").toggleClass("show");
         $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
@@ -111,7 +133,7 @@ $(window).ready(function(){
         $(".show").not(".user-nav-options").removeClass("show");
     });
 
-    $('input[class=cep]').on('blur',function(){
+    $('#cep').on('blur',function(){
         var cep = $jq(this).val();
         console.log(cep);
         $.get('http://viacep.com.br/ws/'+cep+'/json', function(data){
@@ -134,6 +156,67 @@ $(window).ready(function(){
     //cart
     $('#cart').on('click','a.remove',function(){
         $(this).closest('.item').css('background','#FF5454').fadeOut();
+    });
+    
+    
+    
+    /* PRODUCTS*/
+    $('.open_item').on('click',function(e){
+        e.preventDefault();
+        $("ul>li>a").removeClass("active");
+        $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        $(".show").removeClass("show");
+        $('.overlay').fadeIn();
+        var productShow = $('#product-show');
+        productShow.addClass('show').text("");
+
+        var productLeft = $('<div>',{class:'col-sm-6 product-left'});
+        var productTitle = $('<h3>');
+        var img = $('<img>',{
+            css : {
+                width: 300,
+                height: 300
+            },
+        });
+
+        var productRight = $('<div>',{class:'col-sm-6 product-right'});
+        var descriptionTitle = $('<h4>',{text:'Descrição do Produto'});
+        var description = $('<p>');
+
+        var button = $('<button>',{
+            text : 'Adicionar ao Carrinho',
+            class: 'btn btn-primary'
+        });
+
+
+        productTitle.text('Tigaragatiga power');
+        img.attr('src','http://localhost:8080/projeto-loja/theme/images/catalogo/produto08.png');
+        description.text('lorem');
+
+        productLeft.append(img);
+        productRight.append(descriptionTitle,description,button);
+
+        productShow.append(productTitle,productLeft,productRight);
+    });
+    
+    $('.cad-product').on('click',function(e){
+        e.preventDefault();
+        $("ul>li>a").removeClass("active");
+        $(".show").removeClass("show");
+        $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        $('.overlay').fadeIn();
+        var productForm = $('#product-form');
+        productForm.addClass('show');
+    });
+    
+    $('.edit_item').on('click',function(e){
+        e.preventDefault();
+        $("ul>li>a").removeClass("active");
+        $(".show").removeClass("show");
+        $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        $('.overlay').fadeIn();
+        var productForm = $('#product-form');
+        productForm.addClass('show');
     });
 
 });

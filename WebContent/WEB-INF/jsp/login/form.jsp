@@ -31,7 +31,7 @@
                             <button type="submit" class="btn btn-default">Entrar</button>
                         </div>
                         <div class="col-sm-9">
-                            Não tem cadastro? <a href="cadastrar.html">Cadastre-se!</a>
+                            Não tem cadastro? <a href="${pageContext.request.contextPath}/cadastrar">Cadastre-se!</a>
                         </div>
                     </div>
                 </form>

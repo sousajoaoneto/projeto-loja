@@ -1,8 +1,6 @@
-@import "bariol.css";
-@import "league_gothic.css";
-html{
+html,body{
     margin: 0;
-    font-family: "Helvetica",Arial,sans-serif !important;
+    font-family: 'Helvetica',Arial,sans-serif !important;
     text-transform: uppercase;
     font-weight: normal;
 }
@@ -291,6 +289,46 @@ form.light :-ms-input-placeholder {
     color: #fff;
     text-transform: uppercase;
 }
+
+
+form.dark ::-webkit-input-placeholder {
+    color: #000;
+    text-transform: uppercase;
+}
+form.dark :-moz-placeholder { /* Firefox 18- */
+    color: #000;
+    text-transform: uppercase;
+}
+form.dark ::-moz-placeholder {  /* Firefox 19+ */
+    color: #000;
+    text-transform: uppercase;
+}
+form.dark :-ms-input-placeholder {
+    color: #000;
+    text-transform: uppercase;
+}
+
+form.dark input,form.dark textarea,
+form.dark select{
+    background: transparent;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #000;
+    color: #000;
+    transition: all .3s linear;
+}
+form.dark input:focus,form.dark textarea:focus,
+form.dark select:focus{
+    border-bottom: 1px solid #000;
+    outline: none;
+    box-shadow: none;
+}
+form.dark select{
+    width: 100%;
+    padding: 7px;
+    text-transform: uppercase;
+}
+
 .has-feedback .form-control{
     padding-right: 16px;
 }
@@ -320,6 +358,19 @@ form.light :-ms-input-placeholder {
 #catalog-list .container{
     position: relative;
 }
+
+.nav-catalogo {
+    background: #000;
+    position: relative;
+}
+.nav-catalogo select {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    padding: 12px;
+    text-transform: uppercase;
+}
+
 #catalog .container .list {
     padding-top: 50px;
 }
@@ -332,18 +383,50 @@ form.light :-ms-input-placeholder {
     border: 2px solid #e5e5e5;
     padding: 25px;
     margin-bottom: 25px;
+    -webkit-transition: all .3s cubic-bezier(.39,.58,.57,1);
+    -moz-transition: all .3s cubic-bezier(.39,.58,.57,1);
+    -o-transition: all .3s cubic-bezier(.39,.58,.57,1);
+    transition: all .3s cubic-bezier(.39,.58,.57,1);
+    position: relative;
 }
 #catalog .item:hover {
     box-shadow: 0 2px 4px 0px rgba(0,0,0,.3);
-    position: relative;
     border-color: #fff;
+}
+#catalog .item .options {
+    position: absolute;
+    padding: 0;
+    right:10px;
+}
+#catalog .item .options li {
+    display: inline;
+    padding: 2px 5px;
+    font-size: 20px;
+}
+#catalog .item .options li a{
+    color:#000;
+}
+#catalog .item .options li a:hover{
+    color:#2e6da4;
 }
 #catalog .item-img {
     background-position: center center !important;
-    background-size: cover;
+    background-size: cover !important;
     width: 221px;
-    height: 300px;
+    height: 221px;
 }
+
+.popup{
+    display: none;
+    position: fixed;
+    margin: 0 auto;
+    top:0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 9999;
+}
+
 #catalog footer{
     color: #000;
     background: #fff;
@@ -445,3 +528,19 @@ footer{
 .scroll-y{
     overflow-y: scroll;
 }
+
+.overlay{
+    position: fixed;
+    background: rgba(0,0,0,.7);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+#product-form{
+    padding: 30px;
+}
+

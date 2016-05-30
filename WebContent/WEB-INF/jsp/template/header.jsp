@@ -26,7 +26,7 @@
 									<li><a href="#">Ver perfil</a></li>
 									<li><a href="#">Meus Pedidos</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Cadastrar Produto</a></li>
+									<li><a href="#" class="cad-product">Cadastrar Produto</a></li>
 									<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>
 								</ul>
 							</li>
@@ -38,7 +38,7 @@
 		                        <form class="form-horizontal login" action="autenticar" method="post" style="display:none">
 		                            <div class="form-group has-feedback">
 		                                <div class="col-sm-12">
-		                                    <input type="email" class="form-control" id="email" name="usuario.email" placeholder="Email" required />
+		                                    <input type="email" class="form-control" id="email" name="usuario.email" placeholder="Email" autofocus required />
 		                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		                                </div>
 		                            </div>

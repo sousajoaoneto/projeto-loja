@@ -3,6 +3,8 @@ package br.edu.fjn.jpa.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -13,6 +15,7 @@ import br.edu.fjn.dao.util.FabricaDeConexao;
 import br.edu.fjn.jpa.dao.interf.DaoInterfaceProduto;
 import br.edu.fjn.jpa.model.produto.Produto;
 
+@Transactional
 public class DaoProduto implements DaoInterfaceProduto{
 	
 	private EntityManager entityManager = FabricaDeConexao.getManager();
@@ -23,11 +26,15 @@ public class DaoProduto implements DaoInterfaceProduto{
 
 	@Override
 	public void salvar(Produto produto) {
-		entityManager.getTransaction().begin();
+		entityManager = FabricaDeConexao.getManager();
 		try {
+			entityManager.getTransaction().begin();
 			entityManager.persist(produto);
 			entityManager.getTransaction().commit();
-		} catch (Exception e) {
+			entityManager.flush();
+		}catch (Exception e) {
+			System.out.println("Error: Niga");
+			e.printStackTrace();			
 			entityManager.getTransaction().rollback();
 		}finally {
 			entityManager.close();
@@ -41,7 +48,7 @@ public class DaoProduto implements DaoInterfaceProduto{
 			entityManager.merge(produto);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			entityManager.getTransaction().rollback();			
 		}finally {
 			entityManager.close();
 		}
@@ -63,26 +70,38 @@ public class DaoProduto implements DaoInterfaceProduto{
 
 	@Override
 	public List<Produto> listar() {
-		List<Produto> produto = null;
+		List<Produto> produtos = null;
 		try {
-			produto = entityManager.createNamedQuery("from Produto", Produto.class).getResultList();
+			Query query = entityManager.createQuery("SELECT p FROM tb_produto p");
+			produtos = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return produto;
+		return produtos;
 	}
 
 	@Override
 	public List<Produto> localizar (Integer id, String descricaoPro) {
-		EntityManager em = FabricaDeConexao.getManager();
-		Session session = (Session)em.getDelegate();
+		Session session = (Session) entityManager.getDelegate();
 		Criteria criteria = session.createCriteria(Produto.class);
 		criteria.createAlias("produto", "pro");
 		
 		criteria.add(Restrictions.or(Restrictions.eq("pro.id", id),
 				Restrictions.ilike("pro.descricao", descricaoPro, MatchMode.START)));
-		em.close();
+		entityManager.close();
 		return criteria.list();
 	}
-
+	
+	
+	public void recarrega(Produto produto) {
+		entityManager.getTransaction().begin();
+		try {
+			entityManager.refresh(produto);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+		}finally {
+			entityManager.close();
+		}
+	}
 }

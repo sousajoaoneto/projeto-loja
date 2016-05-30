@@ -31,18 +31,11 @@ public class LoginController {
 	@Public
 	@Post("autenticar")
 	public void auth(Usuario usuario){
-		List<Usuario> usuarios = new DaoUsuario().listar();
-		
-		for(int i=0;i<usuarios.size();i++){
-			System.out.println(usuarios.get(i).getNome());
-		}
-		
-		System.out.println("chegou");
+		Usuario achado = new DaoUsuario().findToAuth(usuario.getEmail(),usuario.getSenha());
 		
 		//fa autencicação
-		if(usuario.getEmail().equalsIgnoreCase("mail@mail.com")){
-			usuario.setNome("Tester");
-			userSession.setUsuario(usuario);
+		if( achado!=null ){
+			userSession.setUsuario(achado);
 			result.redirectTo(IndexController.class).index();			
 		}else{
 			result.include("msg", "Usuário ou Senha errados");

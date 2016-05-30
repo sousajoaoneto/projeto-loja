@@ -2,51 +2,81 @@
     pageEncoding="ISO-8859-1"%>
     
     <!-- START FOOTER -->
-	<div id="cart" style="display:block" >
-        <a href="#" class="pull-left close shop"><span class="glyphicon glyphicon-chevron-right"></span></a>
-        <h4 class="title">Meu carrinho</h4>
-        <div class="itens scroll-y">
-            <ul>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-                <li class="item">
-                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img">
-                    <p class="item-title">Relogio</p> <span class="badge item-price">R$ 205,00</span>
-                </li>
-            </ul>
+    <div id="product-form" class="popup">
+            <h4>Cadastrar Produto</h4>
+            <form class="form-horizontal dark" method="post" action="${pageContext.request.contextPath}/produto/salvar">
+                <div class="form-group has-feedback">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="descricao" name="produto.descricao" placeholder="Descrição" required>
+                    </div>
+                </div>
+                
+                <div class="form-group has-feedback">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="modelo" name="modelo.descricao" placeholder="Modelo" list="modelos" required>
+                        <datalist id="modelos">
+                            <option value="Smart"></option>
+                            <option value="Mão"></option>
+                            <option value="Ouro"></option>
+                            <option value="Prata"></option>
+                            <option value="Diamante"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="estoque" name="produto.estoque" placeholder="Estoque" required>
+                    </div>
+                </div>
+                
+                <div class="form-group has-feedback">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="preco" name="produto.preco" placeholder="Preço" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <select name="produto.genero" id="produto-genero" required>
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select name="produto.tecnologia" id="produto-tecnologia" required>
+                            <option value="DIGITAL">Digital</option>
+                            <option value="ANALOGICO">Analógico</option>
+                            <option value="AMBOS">Ambos</option>
+                        </select>
+                    </div>
+                </div>
+
+				
+                <div class="form-group has-feedback">
+                    <div class="col-sm-4">
+                        <select name="cor.descricao" id="produto-cor" required>
+                            <option value="branco">branco</option>
+                            <option value="preto">preto</option>
+                            <option value="dourado">Dourado</option>
+                            <option value="prata">prata</option>
+                        </select>
+                    </div>
+                </div>
+				<div class="form-group has-feedback">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="imagem" name="produto.imagem" placeholder="URL da imagem" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                	<div class="col-sm-2">
+                    	<button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                    <div class="col-sm-2">
+                    	<button type="submit" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <h5>Total <span class="badge item-price">R$ 1000,00</span></h5>
-        <a href="#"><button class="btn btn-primary">Finalizar compra</button></a>
-    </div><!-- END CART -->
+        
+    <div class="overlay" style="display: none"></div>
+    
+    <%@ include file="../carrinho/list.jsp" %>	
 
     <script src="${pageContext.request.contextPath}/theme/js/script.js"></script>
 </body>

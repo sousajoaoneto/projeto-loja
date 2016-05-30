@@ -42,8 +42,7 @@
                                 <input type="text" class="form-control cep" id="cep" name="cidade.cep" placeholder="CEP" required />
                             </div>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control uf" placeholder="UF" disabled>
-                                <input type="hidden" class="form-control" id="state" name="estado.nome" required />
+                                <input type="text" class="form-control uf" id="state" name="estado.nome" placeholder="UF" required />
                             </div>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control cidade" id="city" placeholder="Cidade" name="cidade.nome" required />
@@ -71,11 +70,11 @@
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <div class="checkbox">
-                                    <input type="checkbox"> Aceito os <a href="#">termos</a> e <a href="#">políticas de uso</a>
+                                    <input type="checkbox" required> Aceito os <a href="#">termos</a> e <a href="#">políticas de uso</a>
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <button type="submit" class="btn btn-default">Cadastrar</button>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
                             </div>
                         </div>
                     </form>

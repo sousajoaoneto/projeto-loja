@@ -12,8 +12,7 @@ public class FabricaDeConexao {
 		
 	}
 			
-	public static EntityManager getManager() {
-		
+	public static EntityManager getManager() {		
 		
 		return factory.createEntityManager();
 

@@ -2,7 +2,7 @@ package br.edu.fjn.model;
 
 import java.util.Date;
 
-public class Usuario {
+public class UsuarioWeb {
 	private String nome;
 	private String senha;
 	private String email;
@@ -12,11 +12,11 @@ public class Usuario {
 	private String data_nasc;
 	private String endereco;
 
-	public Usuario() {
+	public UsuarioWeb() {
 
 	}
 
-	public Usuario(String nome, String senha, String email) {
+	public UsuarioWeb(String nome, String senha, String email) {
 		super();
 		this.nome = nome;
 		this.senha = senha;
