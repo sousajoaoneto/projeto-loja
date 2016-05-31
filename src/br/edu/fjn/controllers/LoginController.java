@@ -1,7 +1,5 @@
 package br.edu.fjn.controllers;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;

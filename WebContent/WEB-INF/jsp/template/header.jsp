@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,6 +15,7 @@
     <script src="${pageContext.request.contextPath}/theme/js/jquery.min.js"></script>
 </head>
 <body>
+	<c:set var="userType" scope="session" value="${userSession.usuario.tipo}"/>
     <header>
         <div class="container">
             <div class="nav-options pull-right">            
@@ -21,12 +23,14 @@
                     <c:choose>
 						<c:when test="${userSession.isLogged()}">
 							<li class="dropdown">
-								<a href="#" id="user-nav">${userSession.usuario.getNome()} <img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
+								<a href="#" id="user-nav">${userSession.usuario.nome} <img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
 								<ul class="user-nav-options" style="display:none">
 									<li><a href="#">Ver perfil</a></li>
 									<li><a href="#">Meus Pedidos</a></li>
 									<li class="divider"></li>
-									<li><a href="#" class="cad-product">Cadastrar Produto</a></li>
+									<c:if test="${userType eq 'GERENTE'}">
+										<li><a href="#" class="cad-product">Cadastrar Produto</a></li>
+									</c:if>
 									<li><a href="${pageContext.request.contextPath}/sair">Sair</a></li>
 								</ul>
 							</li>
@@ -35,7 +39,7 @@
 							<li><a href="${pageContext.request.contextPath}/cadastrar">Cadastrar-se</a></li>
 		                    <li>
 		                        <a href="#" id="login">Entrar</a>
-		                        <form class="form-horizontal login" action="autenticar" method="post" style="display:none">
+		                        <form class="form-horizontal login" action="${pageContext.request.contextPath}/autenticar" method="post" style="display:none">
 		                            <div class="form-group has-feedback">
 		                                <div class="col-sm-12">
 		                                    <input type="email" class="form-control" id="email" name="usuario.email" placeholder="Email" autofocus required />

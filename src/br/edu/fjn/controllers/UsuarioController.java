@@ -41,7 +41,7 @@ public class UsuarioController {
 		
 		List<Usuario> usuarios = new DaoUsuario().listar();
 		
-		if(usuarios.size() > 0){			
+		if(usuarios!=null || usuarios.size() > 0){		
 			usuario.setTipo(Tipo.CLIENTE);
 		}else{
 			usuario.setTipo(Tipo.GERENTE);
@@ -49,11 +49,11 @@ public class UsuarioController {
 		cidade.setEstado(estado);
 		endereco.setCidade(cidade);
 		
-		usuario.setData_nasc(new Date(12,12,12));
+		usuario.setData_nasc(new Date(05,30,2016));
 		usuario.setEndereco(endereco);
 		
 		new DaoUsuario().salvar(usuario);
-		result.redirectTo(IndexController.class).index();
+		result.redirectTo(LoginController.class).form();
 		
 		System.out.println(usuario.toString());
 	}

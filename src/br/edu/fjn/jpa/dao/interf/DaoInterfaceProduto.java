@@ -6,7 +6,7 @@ import br.edu.fjn.jpa.model.produto.Produto;
 
 
 public interface DaoInterfaceProduto {
-	void salvar(Produto produto) ;
+	boolean salvar(Produto produto) ;
 	void atualizar(Produto produto);
 	void deletar(Produto produto);
 	List<Produto> listar();

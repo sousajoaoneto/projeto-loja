@@ -39,7 +39,11 @@ public class ProdutoController {
 		produto.setCor(cores);
 		produto.setModelo(modelo);
 		
-		new DaoProduto().salvar(produto);
+		if(new DaoProduto().salvar(produto)){
+			System.out.println("Ya Bro");
+		}else{
+			System.out.println("No Nigga");
+		}
 		
 		result.redirectTo(this).list();		
 	}	

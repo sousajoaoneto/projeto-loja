@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 	<!-- START CART -->
     <div id="cart" style="display:block" >
@@ -13,15 +15,19 @@
 	        <div class="itens scroll-y">
 	        	<strong>Itens:</strong> ${carrinho.totalDeItens }
 				<ul id="cart-list">
-	                <li class="item" data-item="0">
-	                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
-	                    <img src="${pageContext.request.contextPath}/theme/images/watch-gold.jpg" class="item-img" />
-	                    <p class="item-title">Title</p> <span class="badge item-price">R$ 0,00</span>
-	                </li>
+					<c:forEach items="${carrinho.itens}" var="item">
+		                <li class="item" data-item="0">
+		                    <a href="#" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
+		                    <img src="${item.produto.imagem}" class="item-img" />
+		                    <p class="item-title">${item.produto.descricao}</p> <span class="badge item-price"><fmt:formatNumber type="currency"
+value="${item.produto.preco}" currencySymbol="R$"/></span>
+							 <span class="badge bg-info item-qtd">Qtd ${item.quantidade}</span>
+		                </li>
+	                </c:forEach>
 	            </ul>
 	            
 	        </div>
-	        <h5>Total <span class="badge total-price"><fmt:formatNumber type="currency" value="${carrinho.total }"/></span></h5>
+	        <h5>Total <span class="badge total-price"><fmt:formatNumber type="currency" value="${carrinho.total}" currencySymbol="R$"/></span></h5>
 	        <a href="#" class="buy"><button class="btn btn-primary">Finalizar compra</button></a>
         </c:if>
     </div>

@@ -500,6 +500,11 @@ form.dark select{
     width: 100%;
 }
 
+.buy button, button.buy {
+    width: 100%;
+}
+
+
 footer{
     height: 100px;
     line-height: 80px;
@@ -543,4 +548,6 @@ footer{
 #product-form{
     padding: 30px;
 }
+
+
 

@@ -18,6 +18,12 @@ public class CarrinhoItem {
 	}
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	@Override
+	public String toString() {
+		return "CarrinhoItem [produto=" + produto.toString() + ",\n quantidade=" + quantidade + "]";
 	}	
+	
 	
 }

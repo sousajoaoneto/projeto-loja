@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+     
     <!-- START FOOTER -->
+    
+    <!-- START FORM PRODUTOS -->
+    <c:if test="${userType eq 'GERENTE'}">
     <div id="product-form" class="popup">
             <h4>Cadastrar Produto</h4>
             <form class="form-horizontal dark" method="post" action="${pageContext.request.contextPath}/produto/salvar">
@@ -73,6 +78,8 @@
                 </div>
             </form>
         </div>
+        </c:if>
+        <!-- END FORM PRODUTOS -->
         
     <div class="overlay" style="display: none"></div>
     

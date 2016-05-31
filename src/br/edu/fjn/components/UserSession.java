@@ -11,6 +11,7 @@ import br.edu.fjn.jpa.model.usuario.Usuario;
 @SessionScoped
 @Named("userSession")
 public class UserSession implements Serializable{
+	
 	private Usuario usuario;
 
 	public Usuario getUsuario() {
