@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.Result;
 import br.edu.fjn.annotations.Public;
 import br.edu.fjn.jpa.dao.impl.DaoProduto;
 import br.edu.fjn.jpa.model.produto.Cor;
+import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Modelo;
 import br.edu.fjn.jpa.model.produto.Produto;
 
@@ -55,9 +56,23 @@ public class ProdutoController {
 		result.include("produtos", produtos);
 	}
 
+	@Public
+	@Get("pesquisar")
+	public void list(List<Produto> produtos){	
+		result.include("produtos", produtos);
+	}
+	
 	@Get("editar/{codigo}")
 	public void edit(int codigo){
 		System.out.println("Chegou" + 1);
 	}
 	
+	@Public
+	@Post("pesquisar")
+	public void localizar(String descricao, String genero){
+		List<Produto> produtos = new DaoProduto().localizar(null, descricao, genero);		
+		System.out.println(produtos.toString());
+		result.include("produtos", produtos);
+		result.redirectTo(this).list(produtos);
+	}
 }

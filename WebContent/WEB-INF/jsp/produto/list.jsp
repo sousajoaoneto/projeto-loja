@@ -10,27 +10,22 @@
             </c:if>
             <h2>Catálogo</h2>	         
         </div>
-        <div class="nav-catalogo">
-            <select name="tecnologia" id="tecnologia">
-                <option value="tec-all">Tecnologia</option>
-                <option value="analogico">Analógico</option>
-                <option value="digital">Digital</option>
-                <option value="ambos">Ambos</option>
-            </select>
-            <select name="tipo" id="tipo">
-                <option value="tipo-all">Tipo</option>
-            </select>
-            <select name="genero" id="genero">
-                <option value="gen-all">Gênero</option>
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-            </select>
+        	<div class="nav-catalogo">
+        	<form class="form-horizontal search-produtos" action="${pageContext.request.contextPath}/produto/pesquisar" method="post">
+				<input type="search" name="descricao" placeholder="nome do produto" />           		
+           		<select name="genero" required>
+           			<option value="MASCULINO">Masculino</option>
+           			<option value="FEMININO">Feminino</option>
+           		</select>
+            	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+            	<a href="${pageContext.request.contextPath}/catalogo"><button class="btn btn-default">Mostrar todos os produtos</button></a>
+        	</form>	
         </div>
         <div class="container">
             <div class="list">
 	            <c:choose>
 					<c:when test="${empty produtos}">
-						<h1>Sem produtos</h1>
+						<h1>Nenhum produto encontrado</h1>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${produtos}" var="produto">

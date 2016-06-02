@@ -10,5 +10,5 @@ public interface DaoInterfaceProduto {
 	void atualizar(Produto produto);
 	void deletar(Produto produto);
 	List<Produto> listar();
-	List localizar(Integer id, String descricaoPro);
+	List localizar(Integer id, String descricaoPro, String genero);
 }

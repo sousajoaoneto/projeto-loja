@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.transaction.Transactional;
-import javax.transaction.TransactionalException;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.edu.fjn.dao.util.FabricaDeConexao;
 import br.edu.fjn.jpa.dao.interf.DaoInterfaceProduto;
+import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Produto;
 
 @Transactional
@@ -84,17 +83,34 @@ public class DaoProduto implements DaoInterfaceProduto{
 	}
 
 	@Override
-	public List<Produto> localizar (Integer id, String descricaoPro) {
-		EntityManager em = FabricaDeConexao.getManager();
-		Session session = (Session) em.getDelegate();
-		Criteria criteria = session.createCriteria(Produto.class);
-		criteria.createAlias("produto", "pro");
+	public List<Produto> localizar (Integer id, String descricao, String genero) {
 		
-		criteria.add(Restrictions.or(Restrictions.eq("pro.id", id),
-				Restrictions.ilike("pro.descricao", descricaoPro, MatchMode.START)));
+		EntityManager em = FabricaDeConexao.getManager();		
+		Session session = (Session)em.getDelegate();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(Produto.class);
+		
+		if(descricao!=null){
+			criteria.add(
+					Restrictions.or(
+							Restrictions.eq("id_produto", id),
+							Restrictions.eq("genero", Genero.valueOf(genero)),
+							Restrictions.or(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE))
+					));
+		}else{
+			criteria.add(
+					Restrictions.or(
+							Restrictions.eq("id_produto", id),
+							Restrictions.eq("genero", Genero.valueOf(genero))
+					));
+		}
+		
+		
+		
 		em.close();
 		return criteria.list();
 	}
+	
 	
 	public Produto findById(int codigo){
 		EntityManager em = FabricaDeConexao.getManager();
