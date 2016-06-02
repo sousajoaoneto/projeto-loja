@@ -1,5 +1,8 @@
 package br.edu.fjn.controllers;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.edu.fjn.annotations.Public;
 import br.edu.fjn.components.UserSession;
+import br.edu.fjn.dao.util.Util;
 import br.edu.fjn.jpa.dao.impl.DaoUsuario;
 import br.edu.fjn.jpa.model.endereco.Cidade;
 import br.edu.fjn.jpa.model.endereco.Endereco;
@@ -28,6 +32,8 @@ public class UsuarioController {
 	
 	@Inject
 	private UserSession userSession;
+	@Inject
+	private DaoUsuario dao;
 	
 	@Public
 	@Get("cadastrar")//maybe this line can be removed
@@ -37,11 +43,17 @@ public class UsuarioController {
 	
 	@Public
 	@Post("salvar")
-	public void save(Usuario usuario, Endereco endereco, Cidade cidade, Estado estado){
+	public void save(Usuario usuario, Endereco endereco, Cidade cidade, Estado estado) throws NoSuchAlgorithmException, UnsupportedEncodingException, ParseException{
 		
-		List<Usuario> usuarios = new DaoUsuario().listar();
 		
-		if(usuarios!=null || usuarios.size() > 0){		
+		if (dao.alreadyExists("username", usuario.getUsername())|| dao.alreadyExists("cpf", usuario.getCpf()) || dao.alreadyExists("senha", usuario.getSenha())) {
+			System.out.println("Existe");
+			result.include("msg","Tente outros dados");
+			result.redirectTo(UsuarioController.class).form();
+			return;
+		}
+				
+		if(new DaoUsuario().count() > 0){		
 			usuario.setTipo(Tipo.CLIENTE);
 		}else{
 			usuario.setTipo(Tipo.GERENTE);
@@ -49,7 +61,7 @@ public class UsuarioController {
 		cidade.setEstado(estado);
 		endereco.setCidade(cidade);
 		
-		usuario.setData_nasc(new Date(05,30,2016));
+		usuario.setData_nasc(Util.modifyDate(usuario.getData_nasc().toLocaleString()));
 		usuario.setEndereco(endereco);
 		
 		new DaoUsuario().salvar(usuario);

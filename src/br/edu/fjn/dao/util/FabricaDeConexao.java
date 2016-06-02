@@ -17,4 +17,8 @@ public class FabricaDeConexao {
 		return factory.createEntityManager();
 
 	}
+	
+	public String encript(){
+		return null;
+	}
 }

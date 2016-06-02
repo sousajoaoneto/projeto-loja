@@ -1,5 +1,7 @@
 package br.edu.fjn.jpa.model.usuario;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -14,6 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.edu.fjn.dao.util.Util;
 import br.edu.fjn.jpa.model.endereco.Endereco;
 
 @Entity(name = "tb_usuario")
@@ -67,8 +70,8 @@ public class Usuario {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		this.senha = Util.criotograph(senha);
 	}
 
 	public String getCpf() {

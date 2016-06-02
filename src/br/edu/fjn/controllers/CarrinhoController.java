@@ -43,7 +43,7 @@ public class CarrinhoController {
 		result.redirectTo(IndexController.class).list();		
 		
 	}
-	
+		
 	@Public
 	@Get("adicionar")
 	public void adiciona(int codigo) {		
