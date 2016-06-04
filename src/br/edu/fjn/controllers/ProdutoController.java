@@ -10,10 +10,10 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 import br.edu.fjn.annotations.Public;
 import br.edu.fjn.jpa.dao.impl.DaoProduto;
 import br.edu.fjn.jpa.model.produto.Cor;
-import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Modelo;
 import br.edu.fjn.jpa.model.produto.Produto;
 
@@ -22,6 +22,8 @@ import br.edu.fjn.jpa.model.produto.Produto;
 public class ProdutoController {
 	@Inject
 	private Result result;
+	@Inject
+	private DaoProduto dao;
 	
 	@Get("novo")
 	public void form(){
@@ -40,7 +42,7 @@ public class ProdutoController {
 		produto.setCor(cores);
 		produto.setModelo(modelo);
 		
-		if(new DaoProduto().salvar(produto)){
+		if( dao.salvar(produto)){
 			System.out.println("Ya Bro");
 		}else{
 			System.out.println("No Nigga");
@@ -51,9 +53,8 @@ public class ProdutoController {
 	
 	@Public
 	@Get("catalogo")
-	public void list(){
-		List<Produto> produtos = new DaoProduto().listar();		
-		result.include("produtos", produtos);
+	public void list(){		
+		result.include("produtos", dao.listar());
 	}
 
 	@Public
@@ -62,15 +63,27 @@ public class ProdutoController {
 		result.include("produtos", produtos);
 	}
 	
-	@Get("editar/{codigo}")
-	public void edit(int codigo){
-		System.out.println("Chegou" + 1);
+	@Post("editar")
+	public void edit(Produto produto){
+		if(dao.atualizar(produto)){
+			result.include("msg", "Produto editado com sucesso");
+		}else{
+			result.include("msg", "Falha ao alterar produto");
+		}
+		
+		result.redirectTo(IndexController.class).list();
+	}
+	
+	@Get("busca.json")
+	public void buscaJson(int codigo) {
+		Produto produto = dao.findById(codigo);
+		result.use(Results.json()).from(produto).include("modelo").include("cor").serialize();
 	}
 	
 	@Public
 	@Post("pesquisar")
 	public void localizar(String descricao, String genero){
-		List<Produto> produtos = new DaoProduto().localizar(null, descricao, genero);		
+		List<Produto> produtos = dao.localizar(descricao, genero);		
 		System.out.println(produtos.toString());
 		result.include("produtos", produtos);
 		result.redirectTo(this).list(produtos);

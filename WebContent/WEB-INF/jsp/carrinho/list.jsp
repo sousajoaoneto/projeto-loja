@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -8,7 +8,7 @@
         <a href="#" class="pull-left close shop"><span class="glyphicon glyphicon-chevron-right"></span></a>
         <h4 class="title">Meu carrinho</h4>
         <c:if test="${empty carrinho or carrinho.totalDeItens eq 0 }">
-			<span>Você não possui itens no seu carrinho</span>
+			<span>VocÃª nÃ£o possui itens no seu carrinho</span>
 		</c:if>
 		<c:if test="${carrinho.totalDeItens > 0 }">
 		

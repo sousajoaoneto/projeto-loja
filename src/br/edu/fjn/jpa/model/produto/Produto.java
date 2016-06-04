@@ -37,7 +37,7 @@ public class Produto {
 	private Modelo modelo;
 	@OneToMany(cascade = CascadeType.ALL) //verificar o cascade
 	private List<Cor> cor;
-	
+	@Column (nullable = false)
 	private String imagem;
 	
 	public Produto() {

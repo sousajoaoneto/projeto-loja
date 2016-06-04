@@ -188,6 +188,39 @@ $(window).ready(function(){
             class: 'btn btn-primary'
         });
 
+        /*
+         * var codigo = $(this).closest('.item').data('item');
+        $.ajax({
+            // url para o arquivo json.php
+            url : "produto/busca.json",
+            data: {'codigo':codigo},
+            // dataType json
+            dataType : "json",
+            // função para de sucesso
+            success : function(data){
+            	var produto = data.produto;
+            	productForm.find('h4.title').text('Editar '+produto.descricao);
+            	            	
+            	productTitle.text(produto.descricao);
+                img.attr('src',produto.imagem);
+                description.html('Preço: '+produto.preco+'<br>'+
+                		'Quantidade em Estoque: '+produto.estoque+'<br>'
+                		+'Modelo: '+produto.modelo.descricao);
+            	
+            	console.log(data);
+            	
+            	productLeft.append(img);
+                productRight.append(descriptionTitle,description);
+                productShow.append(productTitle,productLeft,productRight);
+                
+                productShow.addClass('show')
+            	$('.overlay').fadeIn();
+            }
+        }).fail(function(data){
+          	console.log("Falha");
+          	console.log(data);
+        });//termina o ajax 
+         * */
 
         productTitle.text('Tigaragatiga power');
         img.attr('src','http://localhost:8080/projeto-loja/theme/images/catalogo/produto08.png');
@@ -205,7 +238,17 @@ $(window).ready(function(){
         $(".show").removeClass("show");
         $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
         $('.overlay').fadeIn();
+        
         var productForm = $('#product-form');
+        var form = productForm.find('form');
+        var action = form.attr('action');        
+        var newAction = action.replace('editar','salvar');
+        
+        form.find('input, textarea').val('');
+        
+        form.attr('action',newAction);
+        productForm.find('h4.title').text('Cadastrar Produto');
+        
         productForm.addClass('show');
     });
     
@@ -214,9 +257,65 @@ $(window).ready(function(){
         $("ul>li>a").removeClass("active");
         $(".show").removeClass("show");
         $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
-        $('.overlay').fadeIn();
+        
         var productForm = $('#product-form');
-        productForm.addClass('show');
+        var form = productForm.find('form');
+        var action = form.attr('action');
+        var newAction = action.replace('salvar','editar');
+        form.attr('action',newAction);
+        
+        var codigo = $(this).closest('.item').data('item');
+        $.ajax({
+            // url para o arquivo json.php
+            url : "produto/busca.json",
+            data: {'codigo':codigo},
+            // dataType json
+            dataType : "json",
+            // função para de sucesso
+            success : function(data){
+            	var produto = data.produto;
+            	productForm.find('h4.title').text('Editar '+produto.descricao);
+            	
+            	//set data form
+            	$('#descricao').val(produto.descricao);
+            	$('#modelo').val(produto.modelo.descricao);
+            	$('#estoque').val(produto.estoque);
+            	$('#preco').val(produto.preco);
+            	$('#produto-genero').val(produto.genero);
+            	$('#imagem').val(produto.imagem);
+            	$('#produto-tecnologia').val(produto.tecnologia);
+            	$('#produto-cor').val(produto.cor[0].descricao);
+            	
+            	//inserir id_produto
+            	$('#id_produto').remove();
+            	var inputId = $('<input>',{
+            		'type':'hidden',
+            		'id': 'id_produto',
+            		'name':'produto.id_produto',
+            		'required':''	
+            	});
+            	inputId.val(produto.id_produto);
+            	form.prepend(inputId);
+            	
+            	//inserir id_modelo
+            	$('#id_produto').remove();
+            	var inputIdModelo = $('<input>',{
+            		'type':'hidden',
+            		'id': 'id_modelo',
+            		'name':'produto.modelo.id_modelo',
+            		'required':''	
+            	});
+            	inputIdModelo.val(produto.modelo.id_modelo);
+            	form.prepend(inputIdModelo);
+            	
+            	console.log(data);
+            	productForm.addClass('show');
+            	$('.overlay').fadeIn();
+            }
+        }).fail(function(data){
+          	console.log("Falha");
+          	console.log(data);
+        });//termina o ajax
     });
 
 });

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ include file="../template/header.jsp" %>
@@ -31,7 +31,7 @@
                             <button type="submit" class="btn btn-default">Entrar</button>
                         </div>
                         <div class="col-sm-9">
-                            Não tem cadastro? <a href="${pageContext.request.contextPath}/cadastrar">Cadastre-se!</a>
+                            NÃ£o tem cadastro? <a href="${pageContext.request.contextPath}/cadastrar">Cadastre-se!</a>
                         </div>
                     </div>
                 </form>
