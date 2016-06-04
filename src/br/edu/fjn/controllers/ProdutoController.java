@@ -76,8 +76,7 @@ public class ProdutoController {
 	
 	@Get("busca.json")
 	public void buscaJson(int codigo) {
-		Produto produto = dao.findById(codigo);
-		result.use(Results.json()).from(produto).include("modelo").include("cor").serialize();
+		result.use(Results.json()).from(dao.findById(codigo)).include("modelo").include("cor").serialize();
 	}
 	
 	@Public

@@ -85,7 +85,7 @@ public class DaoPedido implements DaoInterfacePedido {
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(Pedido.class);
-		//criteria.add(Restrictions.eq("usuario", userSession.getUsuario().getId_usuario())).addOrder(Order.desc("id_pedido"));
+		criteria.add(Restrictions.eq("usuario.id_usuario", userSession.getUsuario().getId_usuario())).addOrder(Order.desc("id_pedido"));
 		
 		//criteria.addOrder(Order.desc("id_pedido"));
 		em.close();
