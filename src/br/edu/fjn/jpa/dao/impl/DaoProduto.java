@@ -74,28 +74,18 @@ public class DaoProduto implements DaoInterfaceProduto{
 
 	@Override
 	public List<Produto> localizar (String descricao, String genero) {
-<<<<<<< HEAD
-		
-=======
->>>>>>> origin/master
+
 		EntityManager em = FabricaDeConexao.getManager();		
 		Session session = (Session)em.getDelegate();
 		session.beginTransaction();
 		Criteria criteria = session.createCriteria(Produto.class);
 		if(descricao!=null){
 			criteria.add(
-<<<<<<< HEAD
-					Restrictions.and(
-							Restrictions.eq("genero", Genero.valueOf(genero)),
-							Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE)
-					));
-=======
 				Restrictions.and(
 					Restrictions.eq("genero", Genero.valueOf(genero)),
 					Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE)
 				)
 			);
->>>>>>> origin/master
 		}else{
 			criteria.add(Restrictions.eq("genero", Genero.valueOf(genero)));
 		}

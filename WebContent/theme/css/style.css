@@ -555,8 +555,6 @@ footer{
     padding: 30px;
 }
 
-
-<<<<<<< HEAD
 /*PEDIDOS*/
 #order section#order-list{
     padding: 100px 0;
@@ -643,9 +641,8 @@ footer{
 #order .etapa.concluido{
     background-color:#000;
 }
-=======
+
 /*------------------------ PERFIL--------------------------------*/
->>>>>>> origin/master
 
 #perfil section#dados{
     padding: 100px 0;

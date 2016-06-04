@@ -154,8 +154,7 @@ $(window).ready(function(){
     });
 
     //cart
-    $('#cart').on('click','a.remove',function(e){
-    	e.preventDefault();
+    $('#cart').on('click','a.remove',function(){
     	setTimeOut(function(){
     		$(this).closest('.item').css('background','#FF5454').fadeOut();
     	},300);

@@ -83,11 +83,9 @@ public class ProdutoController {
 	@Public
 	@Post("pesquisar")
 	public void localizar(String descricao, String genero){
-<<<<<<< HEAD
-		List<Produto> produtos = new DaoProduto().localizar( descricao, genero);		
-=======
+
 		List<Produto> produtos = dao.localizar(descricao, genero);		
->>>>>>> origin/master
+
 		System.out.println(produtos.toString());
 		result.include("produtos", produtos);
 		result.redirectTo(this).list(produtos);
