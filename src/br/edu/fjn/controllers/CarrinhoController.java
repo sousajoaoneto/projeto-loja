@@ -31,16 +31,15 @@ public class CarrinhoController {
 		
 		Produto produto = new DaoProduto().findById(codigo);
 		if(produto!=null){
-			System.out.println(produto.toString());
 			item.setProduto(produto);
 			item.setQuantidade(quantidade);
 			carrinho.adiciona(item);
-			msg = "Produto adicionado ao carrinho";
+			msg = produto.getDescricao()+" adicionado ao carrinho";
 		}else{
 			msg = "Produto não existe";
 		}
 		result.include("msg",msg);
-		result.redirectTo(IndexController.class).list();		
+		result.redirectTo(IndexController.class).list();
 		
 	}
 		
@@ -49,4 +48,12 @@ public class CarrinhoController {
 	public void adiciona(int codigo) {		
 		result.redirectTo(ProdutoController.class).list();		
 	}
+	
+	@Public
+	@Get("remover/{indiceItem}")
+	public void remove(int indiceItem) {
+		carrinho.remove(indiceItem);
+		result.redirectTo(IndexController.class).list();
+	}
+	
 }

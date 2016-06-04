@@ -64,6 +64,12 @@ public class Cor {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Cor [getId_cor()=" + getId_cor() + ", getDescricao()=" + getDescricao() + ", hashCode()=" + hashCode()
+				+ "]";
+	}
 	
 	
 	 

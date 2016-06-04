@@ -46,25 +46,26 @@ public class UsuarioController {
 	public void save(Usuario usuario, Endereco endereco, Cidade cidade, Estado estado) throws NoSuchAlgorithmException, UnsupportedEncodingException, ParseException{
 		
 		
-		if (dao.alreadyExists("username", usuario.getUsername())|| dao.alreadyExists("cpf", usuario.getCpf()) || dao.alreadyExists("senha", usuario.getSenha())) {
+		if ( dao.alreadyExists("username", usuario.getUsername()) || dao.alreadyExists("cpf", usuario.getCpf()) ) {
 			System.out.println("Existe");
 			result.include("msg","Tente outros dados");
 			result.redirectTo(UsuarioController.class).form();
 			return;
 		}
 				
-		if(new DaoUsuario().count() > 0){		
+		if( dao.count() > 0 ){		
 			usuario.setTipo(Tipo.CLIENTE);
 		}else{
 			usuario.setTipo(Tipo.GERENTE);
 		}
+		
 		cidade.setEstado(estado);
 		endereco.setCidade(cidade);
 		
 		usuario.setData_nasc(Util.modifyDate(usuario.getData_nasc().toLocaleString()));
 		usuario.setEndereco(endereco);
 		
-		new DaoUsuario().salvar(usuario);
+		dao.salvar(usuario);
 		result.redirectTo(LoginController.class).form();
 		
 		System.out.println(usuario.toString());

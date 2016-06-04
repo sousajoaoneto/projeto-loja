@@ -19,26 +19,21 @@ public class Pagamento {
 	allocationSize=1)
 	private Integer id_pagamento;
 	@Column(nullable = false)
-	private boolean status_pagamento; 
+	private boolean status_pagamento;
 	@Column(nullable = false)
 	private FormaPagamento forma_pagamento;
 	@Column(nullable = false)
 	private Integer parcelamento;
-	
-	@JoinColumn(nullable=false, name="pedido_fk")
-	@OneToOne
-	private Pedido pedido;
-	
+		
 	public Pagamento(){
 		
 	}
 	
-	public Pagamento(boolean status_pagamento, FormaPagamento forma_pagamento, Integer parcelamento, Pedido pedido) {
+	public Pagamento(boolean status_pagamento, FormaPagamento forma_pagamento, Integer parcelamento) {
 		super();
 		this.status_pagamento = status_pagamento;
 		this.forma_pagamento = forma_pagamento;
 		this.parcelamento = parcelamento;
-		this.pedido = pedido;
 	}
 
 	public Integer getId_pagamento() {
@@ -69,13 +64,7 @@ public class Pagamento {
 		this.parcelamento = parcelamento;
 	}
 
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
+	
 
 	
 	

@@ -1,5 +1,6 @@
 package br.edu.fjn.jpa.model.usuario;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -20,7 +21,7 @@ import br.edu.fjn.dao.util.Util;
 import br.edu.fjn.jpa.model.endereco.Endereco;
 
 @Entity(name = "tb_usuario")
-public class Usuario {
+public class Usuario implements Serializable{
 	@Id
 	@Column(nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genUsu")
@@ -48,6 +49,10 @@ public class Usuario {
 
 	public Usuario() {
 
+	}
+
+	public void setId_usuario(Integer id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getNome() {

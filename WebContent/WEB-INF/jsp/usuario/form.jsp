@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ include file="../template/header.jsp"%>
 
@@ -38,12 +38,12 @@
 				<div class="form-group has-feedback">
 					<div class="col-sm-9">
 						<input type="text" class="form-control" id="address"
-							name="endereco.rua" placeholder="Endereço" required /> <span
+							name="endereco.rua" placeholder="EndereÃ§o" required /> <span
 							class="glyphicon glyphicon-road form-control-feedback"></span>
 					</div>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="address_number"
-							name="endereco.numero" placeholder="Número" required /> <span
+							name="endereco.numero" placeholder="NÃºmero" required /> <span
 							class="glyphicon glyphicon-road form-control-feedback"></span>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 				<div class="form-group has-feedback">
 					<div class="col-sm-12">
 						<input type="text" class="form-control" id="username"
-							name="usuario.username" placeholder="Nome de Usuário" required />
+							name="usuario.username" placeholder="Nome de UsuÃ¡rio" required />
 						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 				</div>
@@ -87,7 +87,7 @@
 					<div class="col-sm-9">
 						<div class="checkbox">
 							<input type="checkbox" required> Aceito os <a href="#">termos</a>
-							e <a href="#">políticas de uso</a>
+							e <a href="#">polÃ­ticas de uso</a>
 						</div>
 					</div>
 					<div class="col-sm-2">

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Joao Sousa on 18/05/2016.
  */
 function cpfValidate(strCPF) {
@@ -154,8 +154,13 @@ $(window).ready(function(){
     });
 
     //cart
-    $('#cart').on('click','a.remove',function(){
-        $(this).closest('.item').css('background','#FF5454').fadeOut();
+    $('#cart').on('click','a.remove',function(e){
+    	e.preventDefault();
+    	setTimeOut(function(){
+    		$(this).closest('.item').css('background','#FF5454').fadeOut();
+    	},300);
+        
+        return true;
     });
     
     
@@ -197,6 +202,8 @@ $(window).ready(function(){
         productRight.append(descriptionTitle,description,button);
 
         productShow.append(productTitle,productLeft,productRight);
+        
+        
     });
     
     $('.cad-product').on('click',function(e){

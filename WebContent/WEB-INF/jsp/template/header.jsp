@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
@@ -23,10 +23,10 @@
                     <c:choose>
 						<c:when test="${userSession.isLogged()}">
 							<li class="dropdown">
-								<a href="#" id="user-nav">${userSession.usuario.nome} <img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
+								<a href="#" id="user-nav">${userSession.usuario.id_usuario} ${userSession.usuario.nome} <img src="${pageContext.request.contextPath}/theme/images/icon-user-o.png" /></a>
 								<ul class="user-nav-options" style="display:none">
 									<li><a href="#">Ver perfil</a></li>
-									<li><a href="#">Meus Pedidos</a></li>
+									<li><a href="${pageContext.request.contextPath}/pedidos">Meus Pedidos</a></li>
 									<li class="divider"></li>
 									<c:if test="${userType eq 'GERENTE'}">
 										<li><a href="#" class="cad-product">Cadastrar Produto</a></li>
@@ -72,8 +72,8 @@
             <nav class="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="${pageContext.request.contextPath}">HOME</a></li>
-                    <li><a href="${pageContext.request.contextPath}/catalogo">Cat·logo</a></li>
-                    <li><a href="#">Sobre NÛs</a></li>
+                    <li><a href="${pageContext.request.contextPath}/catalogo">Cat√°logo</a></li>
+                    <li><a href="#">Sobre N√≥s</a></li>
                 </ul>
             </nav>
 

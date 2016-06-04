@@ -40,6 +40,11 @@ public class Estado {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	@Override
+	public String toString() {
+		return "Estado [getId_estado()=" + getId_estado() + ", getNome()=" + getNome() + "]";
+	}
 	
 	
 }

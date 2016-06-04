@@ -1,6 +1,8 @@
 package br.edu.fjn.jpa.model.pedido;
 
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.edu.fjn.jpa.model.usuario.Usuario;
 
@@ -27,14 +31,30 @@ public class Pedido {
 	@Column(nullable = false)
 	private Double valor_total;
 	@JoinColumn(nullable=true, name="usuario_fk")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH)//ver novamente o cascade
 	private Usuario usuario;
-	@OneToMany
-	private List<ItemPedido> itemPedido; 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ItemPedido> itemPedido;
+	
+	@Column
+	@Temporal(TemporalType.DATE)
+	private Date date = Date.from(Instant.now());
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Pagamento pagamento;
+	
 	public Pedido(){
 		
 	}
 	
+	public Pedido(Double valor_total, Usuario usuario, List<ItemPedido> itemPedido, Pagamento pagamento) {
+		super();
+		this.valor_total = valor_total;
+		this.usuario = usuario;
+		this.itemPedido = itemPedido;
+		this.pagamento = pagamento;
+	}
+
 	public Integer getId_pedido() {
 		return id_pedido;
 	}
@@ -62,6 +82,23 @@ public class Pedido {
 	public void setValor_total(Double valor_total) {
 		this.valor_total = valor_total;
 	}
+	
+	
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id_pedido=" + id_pedido + ", valor_total=" + valor_total + ", usuario=" + usuario.toString()
+				+ ", itemPedido=" + itemPedido.toString() + "]";
+	}
+	
 	
 	
 }

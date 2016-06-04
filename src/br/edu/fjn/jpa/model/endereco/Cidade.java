@@ -64,6 +64,12 @@ public class Cidade {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
+	@Override
+	public String toString() {
+		return "Cidade [getId_cidade()=" + getId_cidade() + ", getEstado()=" + getEstado() + ", getNome()=" + getNome()
+				+ ", getCep()=" + getCep() + "]";
+	}
 	
 	
 }

@@ -8,13 +8,16 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.edu.fjn.dao.util.FabricaDeConexao;
 import br.edu.fjn.jpa.dao.interf.DaoInterfaceProduto;
 import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Produto;
+import br.edu.fjn.jpa.model.usuario.Usuario;
 
 @Transactional
 public class DaoProduto implements DaoInterfaceProduto{
@@ -72,18 +75,18 @@ public class DaoProduto implements DaoInterfaceProduto{
 	@Override
 	public List<Produto> listar() {
 		EntityManager em = FabricaDeConexao.getManager();
-		List<Produto> produtos = null;
-		try {
-			Query query = em.createQuery("SELECT p FROM tb_produto p");
-			produtos = query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return produtos;
+		
+		Session session = (Session)em.getDelegate();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(Produto.class);
+		criteria.addOrder(Order.desc("id_produto"));
+		em.close();
+	
+		return criteria.list();
 	}
 
 	@Override
-	public List<Produto> localizar (Integer id, String descricao, String genero) {
+	public List<Produto> localizar (String descricao, String genero) {
 		
 		EntityManager em = FabricaDeConexao.getManager();		
 		Session session = (Session)em.getDelegate();
@@ -92,21 +95,13 @@ public class DaoProduto implements DaoInterfaceProduto{
 		
 		if(descricao!=null){
 			criteria.add(
-					Restrictions.or(
-							Restrictions.eq("id_produto", id),
+					Restrictions.and(
 							Restrictions.eq("genero", Genero.valueOf(genero)),
-							Restrictions.or(Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE))
+							Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE)
 					));
 		}else{
-			criteria.add(
-					Restrictions.or(
-							Restrictions.eq("id_produto", id),
-							Restrictions.eq("genero", Genero.valueOf(genero))
-					));
+			criteria.add(Restrictions.eq("genero", Genero.valueOf(genero)));
 		}
-		
-		
-		
 		em.close();
 		return criteria.list();
 	}

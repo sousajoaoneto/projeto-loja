@@ -30,6 +30,14 @@ public class ItemPedido {
 		
 	}
 
+	public ItemPedido(Integer quantidade, Produto produto) {
+		super();
+		this.quantidade = quantidade;
+		this.produto = produto;
+	}
+
+
+
 	public Integer getId_item_pedido() {
 		return id_item_pedido;
 	}
@@ -49,6 +57,13 @@ public class ItemPedido {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemPedido [id_item_pedido=" + id_item_pedido + ", quantidade=" + quantidade + ", produto=" + produto.toString()
+				+ "]";
+	}
+	
 	
 	
 }

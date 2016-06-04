@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
      
@@ -12,7 +12,7 @@
             <form class="form-horizontal dark" method="post" action="${pageContext.request.contextPath}/produto/salvar">
                 <div class="form-group has-feedback">
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="descricao" name="produto.descricao" placeholder="Descrição" required>
+                        <input type="text" class="form-control" id="descricao" name="produto.descricao" placeholder="DescriÃ§Ã£o" required>
                     </div>
                 </div>
                 
@@ -21,7 +21,7 @@
                         <input type="text" class="form-control" id="modelo" name="modelo.descricao" placeholder="Modelo" list="modelos" required>
                         <datalist id="modelos">
                             <option value="Smart"></option>
-                            <option value="Mão"></option>
+                            <option value="MÃ£o"></option>
                             <option value="Ouro"></option>
                             <option value="Prata"></option>
                             <option value="Diamante"></option>
@@ -34,7 +34,7 @@
                 
                 <div class="form-group has-feedback">
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="preco" name="produto.preco" placeholder="Preço" required>
+                        <input type="text" class="form-control" id="preco" name="produto.preco" placeholder="PreÃ§o" required>
                     </div>
                     <div class="col-sm-4">
                         <select name="produto.genero" id="produto-genero" required>
@@ -45,7 +45,7 @@
                     <div class="col-sm-4">
                         <select name="produto.tecnologia" id="produto-tecnologia" required>
                             <option value="DIGITAL">Digital</option>
-                            <option value="ANALOGICO">Analógico</option>
+                            <option value="ANALOGICO">AnalÃ³gico</option>
                             <option value="AMBOS">Ambos</option>
                         </select>
                     </div>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+Ôªø<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ include file="../template/header.jsp" %>
 
 <main id="catalog" class="catalogo">
@@ -8,7 +8,7 @@
         	<c:if test="${msg ne null}">
             	<div class="alert alert-info">${msg}</div>
             </c:if>
-            <h2>Cat·logo</h2>	         
+            <h2>Cat√°logo</h2>	         
         </div>
         	<div class="nav-catalogo">
         	<form class="form-horizontal search-produtos" action="${pageContext.request.contextPath}/produto/pesquisar" method="post">
@@ -18,7 +18,7 @@
            			<option value="FEMININO">Feminino</option>
            		</select>
             	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
-            	<a href="${pageContext.request.contextPath}/catalogo"><button class="btn btn-default">Mostrar todos os produtos</button></a>
+            	<a href="${pageContext.request.contextPath}/catalogo"class="btn btn-default">Mostrar todos os produtos</a>
         	</form>	
         </div>
         <div class="container">
@@ -38,7 +38,7 @@
 			                    </ul>
 			                    <div class="item-img" style="background: url(${produto.imagem}) no-repeat;"></div>
 			                    <h4>${produto.descricao}</h4>
-			                    <div class="price"><span class="value">${produto.preco}</span> ‡ vista</div>
+			                    <div class="price"><span class="value">${produto.preco}</span> √† vista</div>
 			                    
 			                    <!-- Adicionando o produto no carrinho de compras -->
 								<form class="form-horizontal" action="${pageContext.request.contextPath}/carrinho/adicionar" method="post">				

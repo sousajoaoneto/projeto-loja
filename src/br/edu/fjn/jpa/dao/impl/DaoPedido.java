@@ -2,14 +2,26 @@ package br.edu.fjn.jpa.dao.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import br.edu.fjn.components.UserSession;
 import br.edu.fjn.dao.util.FabricaDeConexao;
 import br.edu.fjn.jpa.dao.interf.DaoInterfacePedido;
 import br.edu.fjn.jpa.model.pedido.Pedido;
+import br.edu.fjn.jpa.model.usuario.Usuario;
 
 public class DaoPedido implements DaoInterfacePedido {
 
+	@Inject
+	private UserSession userSession;
+	
 	private EntityManager entityManager = FabricaDeConexao.getManager();
 	
 	public DaoPedido(){
@@ -17,55 +29,68 @@ public class DaoPedido implements DaoInterfacePedido {
 	}
 	
 	@Override
-	public void salvar(Pedido pedido) {
-		entityManager.getTransaction().begin();
+	public boolean salvar(Pedido pedido) {
+		
+		EntityManager em = FabricaDeConexao.getManager();
+		//pedido.getUsuario().setId_usuario(1);
 		try {
-			entityManager.persist(pedido);
-			entityManager.getTransaction().commit();
+			em.getTransaction().begin();
+			em.persist(pedido);
+			em.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			System.out.println(pedido.getUsuario().toString());
+			e.printStackTrace();
+			return false;
 		}finally {
-			entityManager.close();
+			em.close();			
 		}
 	}
 
 	@Override
 	public void atualizar(Pedido pedido) {
-		entityManager.getTransaction().begin();
+		EntityManager em = FabricaDeConexao.getManager();
+		em.getTransaction().begin();
 		try {
-			entityManager.merge(pedido);
-			entityManager.getTransaction().commit();
+			em.merge(pedido);
+			em.getTransaction().commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			em.getTransaction().rollback();
 		}finally {
-			entityManager.close();
+			em.close();
 		}
 		
 	}
 
 	@Override
 	public void deletar(Pedido pedido) {
-		entityManager.getTransaction().begin();
+		EntityManager em = FabricaDeConexao.getManager();
+		em.getTransaction().begin();
 		try {
-			entityManager.remove(pedido);
-			entityManager.getTransaction().commit();
+			em.remove(pedido);
+			em.getTransaction().commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			em.getTransaction().rollback();
 		}finally {
-			entityManager.close();
+			em.close();
 		}
 		
 	}
 
 	@Override
 	public List<Pedido> listar() {
-		List<Pedido> pedidos = null;
-		try {
-			pedidos = entityManager.createNamedQuery("from Pedido", Pedido.class).getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return pedidos;
+		EntityManager em = FabricaDeConexao.getManager();
+		System.out.println(userSession.getUsuario().getId_usuario());
+		Session session = (Session)em.getDelegate();
+		session.beginTransaction();
+		
+		Criteria criteria = session.createCriteria(Pedido.class);
+		//criteria.add(Restrictions.eq("usuario", userSession.getUsuario().getId_usuario())).addOrder(Order.desc("id_pedido"));
+		
+		//criteria.addOrder(Order.desc("id_pedido"));
+		em.close();
+	
+		return criteria.list();
 	}
 
 }

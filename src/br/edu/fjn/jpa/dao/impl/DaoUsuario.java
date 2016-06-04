@@ -22,9 +22,7 @@ public class DaoUsuario implements DaoInterfaceUsuario {
 	}
 
 	@Override
-	public void salvar(Usuario usuario) {
-		
-		
+	public void salvar(Usuario usuario) {		
 		
 		EntityManager em = FabricaDeConexao.getManager();
 		try {

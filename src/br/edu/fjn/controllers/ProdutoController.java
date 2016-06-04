@@ -13,7 +13,6 @@ import br.com.caelum.vraptor.Result;
 import br.edu.fjn.annotations.Public;
 import br.edu.fjn.jpa.dao.impl.DaoProduto;
 import br.edu.fjn.jpa.model.produto.Cor;
-import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Modelo;
 import br.edu.fjn.jpa.model.produto.Produto;
 
@@ -70,7 +69,7 @@ public class ProdutoController {
 	@Public
 	@Post("pesquisar")
 	public void localizar(String descricao, String genero){
-		List<Produto> produtos = new DaoProduto().localizar(null, descricao, genero);		
+		List<Produto> produtos = new DaoProduto().localizar( descricao, genero);		
 		System.out.println(produtos.toString());
 		result.include("produtos", produtos);
 		result.redirectTo(this).list(produtos);

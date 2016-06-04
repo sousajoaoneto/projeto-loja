@@ -64,6 +64,12 @@ public class Modelo {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Modelo [getId_modelo()=" + getId_modelo() + ", getDescricao()=" + getDescricao() + ", hashCode()="
+				+ hashCode() + "]";
+	}
 	
 	
 	

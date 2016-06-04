@@ -71,6 +71,13 @@ public class Endereco {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Endereco [getId_end()=" + getId_end() + ", getCidade()=" + getCidade() + ", getRua()=" + getRua()
+				+ ", getNumero()=" + getNumero() + "]";
+	}
 	
 	
 }

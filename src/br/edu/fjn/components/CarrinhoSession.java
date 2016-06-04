@@ -38,5 +38,15 @@ public class CarrinhoSession implements Serializable {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+
+	public void remove(int indiceItem) {
+		CarrinhoItem removido = itens.remove(indiceItem);
+		total -= removido.getProduto().getPreco() * removido.getQuantidade();		
+	}
+	
+	public void clear(){
+		itens.clear();
+		total = 0.0;
+	}
 }
 
