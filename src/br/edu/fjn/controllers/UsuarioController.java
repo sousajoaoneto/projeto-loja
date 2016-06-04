@@ -39,14 +39,18 @@ public class UsuarioController {
 	@Get("cadastrar")//maybe this line can be removed
 	public void form(){
 		//chama usuario/form.jsp
-	}
+	}	
 	
 	@Public
 	@Post("salvar")
 	public void save(Usuario usuario, Endereco endereco, Cidade cidade, Estado estado) throws NoSuchAlgorithmException, UnsupportedEncodingException, ParseException{
 		
 		
+<<<<<<< HEAD
 		if ( dao.alreadyExists("username", usuario.getUsername()) || dao.alreadyExists("cpf", usuario.getCpf()) ) {
+=======
+		if (dao.alreadyExists("username", usuario.getUsername())|| dao.alreadyExists("cpf", usuario.getCpf())) {
+>>>>>>> origin/master
 			System.out.println("Existe");
 			result.include("msg","Tente outros dados");
 			result.redirectTo(UsuarioController.class).form();
@@ -71,23 +75,9 @@ public class UsuarioController {
 		System.out.println(usuario.toString());
 	}
 	
-	@Get("editar/{codigo}")
-	public void edit(int codigo){
+	@Get("perfil")
+	public void perfil(){
 		
 	}
 	
-	@Post("atualizar")
-	public void update(Usuario usuario){
-		
-	}
-	
-	@Get("listar")
-	public void list(){
-		
-	}
-	
-	@Get("deletar/{codigo}")
-	public void delete(int codigo){
-		
-	}
 }

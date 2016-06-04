@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-     
-    <!-- START FOOTER -->
-    
-<<<<<<< HEAD
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
     <!-- START FORM PRODUTOS -->
     <c:if test="${userType eq 'GERENTE'}">
     <div id="product-form" class="popup">
-            <h4>Cadastrar Produto</h4>
+            <h4 class="title">Cadastrar Produto</h4>
             <form class="form-horizontal dark" method="post" action="${pageContext.request.contextPath}/produto/salvar">
+            	
                 <div class="form-group has-feedback">
                     <div class="col-sm-12">
                         <input type="text" class="form-control" id="descricao" name="produto.descricao" placeholder="Descrição" required>
@@ -81,14 +78,3 @@
         </div>
         </c:if>
         <!-- END FORM PRODUTOS -->
-=======
-    <%@ include file="../produto/form.jsp" %>
->>>>>>> origin/master
-        
-    <div class="overlay" style="display: none"></div>
-    
-    <%@ include file="../carrinho/list.jsp" %>	
-
-    <script src="${pageContext.request.contextPath}/theme/js/script.js"></script>
-</body>
-</html>

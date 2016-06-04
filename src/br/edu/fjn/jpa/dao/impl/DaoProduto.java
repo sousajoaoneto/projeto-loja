@@ -44,32 +44,19 @@ public class DaoProduto implements DaoInterfaceProduto{
 	}
 
 	@Override
-	public void atualizar(Produto produto) {
+	public boolean atualizar(Produto produto) {
 		EntityManager em = FabricaDeConexao.getManager();
-		em.getTransaction().begin();
 		try {
-			em.merge(produto);
+			em.getTransaction().begin();
+			em.refresh(produto);
 			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();			
-		}finally {
-			em.close();
-		}
-	}
-
-	@Override
-	public void deletar(Produto produto) {
-		EntityManager em = FabricaDeConexao.getManager();
-		em.getTransaction().begin();
-		try {
-			em.remove(produto);
-			em.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+			return false;
 		}finally {
 			em.close();
 		}
-		
 	}
 
 	@Override
@@ -87,18 +74,28 @@ public class DaoProduto implements DaoInterfaceProduto{
 
 	@Override
 	public List<Produto> localizar (String descricao, String genero) {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> origin/master
 		EntityManager em = FabricaDeConexao.getManager();		
 		Session session = (Session)em.getDelegate();
 		session.beginTransaction();
 		Criteria criteria = session.createCriteria(Produto.class);
-		
 		if(descricao!=null){
 			criteria.add(
+<<<<<<< HEAD
 					Restrictions.and(
 							Restrictions.eq("genero", Genero.valueOf(genero)),
 							Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE)
 					));
+=======
+				Restrictions.and(
+					Restrictions.eq("genero", Genero.valueOf(genero)),
+					Restrictions.ilike("descricao", descricao, MatchMode.ANYWHERE)
+				)
+			);
+>>>>>>> origin/master
 		}else{
 			criteria.add(Restrictions.eq("genero", Genero.valueOf(genero)));
 		}
@@ -117,6 +114,5 @@ public class DaoProduto implements DaoInterfaceProduto{
 		}finally {
 			em.close();			
 		}
-	}
-	
+	}	
 }

@@ -7,8 +7,11 @@ import br.edu.fjn.jpa.model.produto.Produto;
 
 public interface DaoInterfaceProduto {
 	boolean salvar(Produto produto) ;
-	void atualizar(Produto produto);
-	void deletar(Produto produto);
+	boolean atualizar(Produto produto);
 	List<Produto> listar();
+<<<<<<< HEAD
 	List localizar( String descricaoPro, String genero);
+=======
+	List localizar(String descricaoPro, String genero);
+>>>>>>> origin/master
 }

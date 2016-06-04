@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+>>>>>>> origin/master
     pageEncoding="UTF-8"%>
 <%@ include file="../template/header.jsp" %>
 
@@ -18,7 +22,11 @@
            			<option value="FEMININO">Feminino</option>
            		</select>
             	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+<<<<<<< HEAD
             	<a href="${pageContext.request.contextPath}/catalogo"class="btn btn-default">Mostrar todos os produtos</a>
+=======
+            	<a href="${pageContext.request.contextPath}/catalogo" class="btn btn-default">Mostrar todos os produtos</a>
+>>>>>>> origin/master
         	</form>	
         </div>
         <div class="container">
@@ -38,7 +46,12 @@
 			                    </ul>
 			                    <div class="item-img" style="background: url(${produto.imagem}) no-repeat;"></div>
 			                    <h4>${produto.descricao}</h4>
+<<<<<<< HEAD
 			                    <div class="price"><span class="value">${produto.preco}</span> à vista</div>
+=======
+			                    <div class="price"><span class="value"><fmt:formatNumber type="currency"
+value="${produto.preco}" currencySymbol="R$"/></span> à vista</div>
+>>>>>>> origin/master
 			                    
 			                    <!-- Adicionando o produto no carrinho de compras -->
 								<form class="form-horizontal" action="${pageContext.request.contextPath}/carrinho/adicionar" method="post">				

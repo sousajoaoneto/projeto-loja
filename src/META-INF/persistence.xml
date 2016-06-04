@@ -16,7 +16,11 @@
 			<property name="javax.persistence.jdbc.driver" 
 				value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
+<<<<<<< HEAD
 			<property name="javax.persistence.jdbc.password" value="adm123" />
+=======
+			<property name="javax.persistence.jdbc.password" value="valeria" />
+>>>>>>> origin/master
 		</properties>
 	</persistence-unit>
 </persistence>
