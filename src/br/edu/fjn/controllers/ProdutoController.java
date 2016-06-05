@@ -20,14 +20,16 @@ import br.edu.fjn.jpa.model.produto.Produto;
 @Controller
 @Path("produto")
 public class ProdutoController {
+	
 	@Inject
 	private Result result;
+	
 	@Inject
 	private DaoProduto dao;
 	
 	@Get("novo")
 	public void form(){
-		
+		result.include("pageTitle", "Cadastrar Produto");
 	}
 	
 	@Get("salvar")
@@ -43,9 +45,9 @@ public class ProdutoController {
 		produto.setModelo(modelo);
 		
 		if( dao.salvar(produto)){
-			System.out.println("Ya Bro");
+			result.include("msg", produto.getDescricao()+" cadastrado!");
 		}else{
-			System.out.println("No Nigga");
+			result.include("msg", "Falha ao cadastrar produto!");
 		}
 		
 		result.redirectTo(this).list();		
@@ -53,24 +55,30 @@ public class ProdutoController {
 	
 	@Public
 	@Get("catalogo")
-	public void list(){		
+	public void list(){
+		result.include("pageTitle", "Catálogo");
 		result.include("produtos", dao.listar());
 	}
 
 	@Public
 	@Get("pesquisar")
 	public void list(List<Produto> produtos){	
+		result.include("pageTitle", "Pesquisa");
 		result.include("produtos", produtos);
 	}
 	
 	@Post("editar")
-	public void edit(Produto produto){
-		if(dao.atualizar(produto)){
-			result.include("msg", "Produto editado com sucesso");
+	public void edit(Produto produto, Modelo modelo, Cor cor){
+		List<Cor> cores = new ArrayList<>();
+		cores.add(cor);
+		produto.setCor(cores);
+		produto.setModelo(modelo);
+		
+		if( dao.atualizar(produto) ){
+			result.include("msg", "Produto editado com sucesso");			
 		}else{
 			result.include("msg", "Falha ao alterar produto");
 		}
-		
 		result.redirectTo(IndexController.class).list();
 	}
 	

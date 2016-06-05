@@ -21,7 +21,8 @@ public class CarrinhoController {
 	private Result result;	
 	@Inject
 	private CarrinhoSession carrinho;
-	
+	@Inject
+	private DaoProduto daoProduto;
 	
 	@Public
 	@Post("adicionar")
@@ -29,7 +30,7 @@ public class CarrinhoController {
 		String msg;
 		CarrinhoItem item = new CarrinhoItem();
 		
-		Produto produto = new DaoProduto().findById(codigo);
+		Produto produto = daoProduto.findById(codigo);
 		if(produto!=null){
 			item.setProduto(produto);
 			item.setQuantidade(quantidade);

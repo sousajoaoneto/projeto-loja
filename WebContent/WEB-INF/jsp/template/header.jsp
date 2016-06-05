@@ -6,7 +6,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Wacther Clock | Tigaragatiga</title>
+    <title>
+    <c:choose>
+		<c:when test="${empty pageTitle}">
+			Wacther Clock | Tigaragatiga
+		</c:when>
+		<c:otherwise>
+			${pageTitle}
+		</c:otherwise>
+	</c:choose>
+    </title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/bootstrap.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/css/style.css"/>

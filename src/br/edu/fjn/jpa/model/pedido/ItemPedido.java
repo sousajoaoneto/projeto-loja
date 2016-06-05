@@ -1,6 +1,7 @@
 package br.edu.fjn.jpa.model.pedido;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,9 +35,11 @@ public class ItemPedido {
 		super();
 		this.quantidade = quantidade;
 		this.produto = produto;
+	}	
+	
+	public void setId_item_pedido(Integer id_item_pedido) {
+		this.id_item_pedido = id_item_pedido;
 	}
-
-
 
 	public Integer getId_item_pedido() {
 		return id_item_pedido;

@@ -19,7 +19,7 @@ import br.edu.fjn.jpa.model.produto.Genero;
 import br.edu.fjn.jpa.model.produto.Produto;
 import br.edu.fjn.jpa.model.usuario.Usuario;
 
-@Transactional
+
 public class DaoProduto implements DaoInterfaceProduto{
 		
 	public DaoProduto() {
@@ -48,11 +48,12 @@ public class DaoProduto implements DaoInterfaceProduto{
 		EntityManager em = FabricaDeConexao.getManager();
 		try {
 			em.getTransaction().begin();
-			em.refresh(produto);
+			em.merge(produto);
 			em.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			em.getTransaction().rollback();
+			System.out.println(e);
+			//em.getTransaction().rollback();
 			return false;
 		}finally {
 			em.close();

@@ -15,6 +15,7 @@ import br.edu.fjn.components.CarrinhoItem;
 import br.edu.fjn.components.CarrinhoSession;
 import br.edu.fjn.components.UserSession;
 import br.edu.fjn.jpa.dao.impl.DaoPedido;
+import br.edu.fjn.jpa.model.pedido.Entrega;
 import br.edu.fjn.jpa.model.pedido.FormaPagamento;
 import br.edu.fjn.jpa.model.pedido.ItemPedido;
 import br.edu.fjn.jpa.model.pedido.Pagamento;
@@ -34,6 +35,7 @@ public class PedidoController {
 	
 	@Get("pedidos")
 	public void list(){
+		result.include("pageTitle", "Meus Pedidos");
 		result.include("pedidos", dao.listar());
 	}
 	
@@ -48,24 +50,19 @@ public class PedidoController {
 			pagamento.setParcelamento(1);
 			pagamento.setStatus_pagamento(false);
 			
+			Entrega entrega = new Entrega("Não Enviado");
 			
-			for(CarrinhoItem carrinhoItem : carrinhoSession.getItens()){
-				itemPedido.add(new ItemPedido(carrinhoItem.getQuantidade(),carrinhoItem.getProduto()));
-			}
-					
+			for( CarrinhoItem carrinhoItem : carrinhoSession.getItens() ){
+				itemPedido.add( new ItemPedido( carrinhoItem.getQuantidade(), carrinhoItem.getProduto() ) );
+			}					
 			
-			Pedido pedido = new Pedido(carrinhoSession.getTotal(),userSession.getUsuario(),itemPedido,pagamento);
-			
-			//itemPedido.forEach(item->System.out.println(item.getProduto().toString()));
-			
-			//System.out.println(pedido.toString());
-			
+			Pedido pedido = new Pedido( carrinhoSession.getTotal(), userSession.getUsuario(), itemPedido, pagamento, entrega);
 			
 			if( dao.salvar(pedido) ){
 				msg.append("Produto inserido");
 				carrinhoSession.clear();
 			}else{
-				msg.append("Falha ao inserir produto");
+				msg.append("Falha ao finalizar pedido");
 			}	
 			
 			

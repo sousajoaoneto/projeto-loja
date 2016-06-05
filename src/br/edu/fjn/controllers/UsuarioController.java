@@ -37,7 +37,8 @@ public class UsuarioController {
 
 	@Public
 	@Get("cadastrar") // maybe this line can be removed
-	public void form() {
+	public void form() {	
+		result.include("pageTitle", "Cadastrar-se");
 		// chama usuario/form.jsp
 	}
 
@@ -48,8 +49,7 @@ public class UsuarioController {
 
 		if (dao.alreadyExists("username", usuario.getUsername()) || dao.alreadyExists("cpf", usuario.getCpf())) {
 
-			System.out.println("Existe");
-			result.include("msg", "Tente outros dados");
+			result.include("msg", "Nome de usuário ou senha inválidos! Tente outros dados");
 			result.redirectTo(UsuarioController.class).form();
 			return;
 		}
@@ -67,14 +67,15 @@ public class UsuarioController {
 		usuario.setEndereco(endereco);
 
 		dao.salvar(usuario);
+		result.include("msg", "Entre com seus dados para fazer login");
 		result.redirectTo(LoginController.class).form();
 
-		System.out.println(usuario.toString());
+		//System.out.println(usuario.toString());
 	}
 
 	@Get("perfil")
 	public void perfil() {
-
+		result.include("pageTitle", "Meu Perfil");
 	}
 
 }

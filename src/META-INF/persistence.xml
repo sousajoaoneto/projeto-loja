@@ -8,7 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
 			<property name="javax.persistence.jdbc.url" 
-				value="jdbc:postgresql://localhost:5432/banco-loja-teste" />
+				value="jdbc:postgresql://localhost:5432/banco-loja" />
 			<property name="hibernate.dialect" 
 				value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

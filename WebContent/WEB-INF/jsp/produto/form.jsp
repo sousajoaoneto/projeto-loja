@@ -71,7 +71,7 @@
                     	<button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                     <div class="col-sm-2">
-                    	<button type="submit" class="btn btn-default">Cancelar</button>
+                    	<a class="btn btn-default close-edit">Cancelar</a>
                     </div>
                 </div>
             </form>

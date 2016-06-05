@@ -82,8 +82,24 @@ $(window).ready(function(){
     $(".overlay").on("click",function(e) {
         $(".show").fadeOut().removeClass("show");
         $(this).fadeOut();
+        if( $('#id_produto') ){
+        	$('#id_produto').remove();
+        }
+        if( $('#id_modelo') ){
+        	$('#id_modelo').remove();
+        }
     });
-
+    $(".close-edit").on("click",function(e) {
+        $(".show").fadeOut().removeClass("show");
+        $('.overlay').fadeOut();
+        if( $('#id_produto') ){
+        	$('#id_produto').remove();
+        }
+        if( $('#id_modelo') ){
+        	$('#id_modelo').remove();
+        }
+    });
+    
     /*
      $(window).on("click",function(e) {
      var el = e.target, target = $(el).attr("id");
@@ -116,10 +132,12 @@ $(window).ready(function(){
         formLogin.toggleClass("show");
         $(".show").not(formLogin).removeClass("show");
         $("#user-nav").find("img").attr("src","http://localhost:8080/projeto-loja/theme/images/icon-user-o.png");
+        $('.overlay').fadeOut();
     });
     // CHANGE THIS CODE
     $("#user-nav").on("click",function(e) {
         e.preventDefault();
+        $('.overlay').fadeOut();
         $("ul>li>a").not("#user-nav").removeClass("active");
 
         $("#user-nav").toggleClass("active");
@@ -187,13 +205,7 @@ $(window).ready(function(){
         var descriptionTitle = $('<h4>',{text:'Descrição do Produto'});
         var description = $('<p>');
 
-        var button = $('<button>',{
-            text : 'Adicionar ao Carrinho',
-            class: 'btn btn-primary'
-        });
-
-        /*
-         * var codigo = $(this).closest('.item').data('item');
+        var codigo = $(this).closest('.item').data('item');
         $.ajax({
             // url para o arquivo json.php
             url : "produto/busca.json",
@@ -203,12 +215,16 @@ $(window).ready(function(){
             // função para de sucesso
             success : function(data){
             	var produto = data.produto;
-            	productForm.find('h4.title').text('Editar '+produto.descricao);
             	            	
+            	if( produto.tecnologia == "AMBOS" )
+            		var tecnologia = "DIGITAL | ANALÓGICO";
+            	else
+            		var tecnologia = produto.tecnologia;
+            	
             	productTitle.text(produto.descricao);
                 img.attr('src',produto.imagem);
-                description.html('Preço: '+produto.preco+'<br>'+
-                		'Quantidade em Estoque: '+produto.estoque+'<br>'
+                description.html('<span class="badge bg-info item-qtd">R$ '+number_format(produto.preco,2)+'</span><br>'+
+                		'Tecnologia: '+tecnologia+'<br>'
                 		+'Modelo: '+produto.modelo.descricao);
             	
             	console.log(data);
@@ -224,19 +240,16 @@ $(window).ready(function(){
           	console.log("Falha");
           	console.log(data);
         });//termina o ajax 
-         * */
 
-        productTitle.text('Tigaragatiga power');
-        img.attr('src','http://localhost:8080/projeto-loja/theme/images/catalogo/produto08.png');
-        description.text('lorem');
 
         productLeft.append(img);
-        productRight.append(descriptionTitle,description,button);
+        productRight.append(descriptionTitle,description);
 
         productShow.append(productTitle,productLeft,productRight);
-        
-        
+       
     });
+    
+    
     
     $('.cad-product').on('click',function(e){
         e.preventDefault();
@@ -250,10 +263,17 @@ $(window).ready(function(){
         var action = form.attr('action');        
         var newAction = action.replace('editar','salvar');
         
-        form.find('input, textarea').val('');
+        form.find('input, textarea, select').val('');
         
         form.attr('action',newAction);
         productForm.find('h4.title').text('Cadastrar Produto');
+        
+        if( $('#id_produto') ){
+        	$('#id_produto').remove();
+        }
+        if( $('#id_modelo') ){
+        	$('#id_modelo').remove();
+        }
         
         productForm.addClass('show');
     });
@@ -290,9 +310,10 @@ $(window).ready(function(){
             	$('#produto-genero').val(produto.genero);
             	$('#imagem').val(produto.imagem);
             	$('#produto-tecnologia').val(produto.tecnologia);
-            	$('#produto-cor').val(produto.cor[0].descricao);
+            	if(produto.cor.lenght > 0)
+            		$('#produto-cor').val(produto.cor[0].descricao);
             	
-            	//inserir id_produto
+            	//inserir id_produto por input hidden
             	$('#id_produto').remove();
             	var inputId = $('<input>',{
             		'type':'hidden',
@@ -301,18 +322,18 @@ $(window).ready(function(){
             		'required':''	
             	});
             	inputId.val(produto.id_produto);
-            	form.prepend(inputId);
             	
-            	//inserir id_modelo
+            	//inserir id_modelo por input hidden
             	$('#id_produto').remove();
             	var inputIdModelo = $('<input>',{
             		'type':'hidden',
             		'id': 'id_modelo',
-            		'name':'produto.modelo.id_modelo',
+            		'name':'modelo.id_modelo',
             		'required':''	
             	});
             	inputIdModelo.val(produto.modelo.id_modelo);
-            	form.prepend(inputIdModelo);
+            	
+            	form.prepend(inputId,inputIdModelo);//adicionando input hidden no form
             	
             	console.log(data);
             	productForm.addClass('show');
@@ -325,3 +346,26 @@ $(window).ready(function(){
     });
 
 });
+
+function number_format(amount, decimals) {
+
+    amount += ''; // por si pasan un numero en vez de un string
+    amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+
+    decimals = decimals || 0; // por si la variable no fue fue pasada
+
+    // si no es un numero o es igual a cero retorno el mismo cero
+    if (isNaN(amount) || amount === 0) 
+        return parseFloat(0).toFixed(decimals);
+
+    // si es mayor o menor que cero retorno el valor formateado como numero
+    amount = '' + amount.toFixed(decimals);
+
+    var amount_parts = amount.split('.'),
+        regexp = /(\d+)(\d{3})/;
+
+    while (regexp.test(amount_parts[0]))
+        amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+
+    return amount_parts.join('.');
+}

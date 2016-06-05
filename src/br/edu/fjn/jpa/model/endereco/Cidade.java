@@ -37,6 +37,10 @@ public class Cidade {
 		this.estado = estado;
 	}
 
+	public void setId_cidade(Integer id_cidade) {
+		this.id_cidade = id_cidade;
+	}
+
 	public Integer getId_cidade() {
 		return id_cidade;
 	}
@@ -65,11 +69,55 @@ public class Cidade {
 		this.cep = cep;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Cidade [getId_cidade()=" + getId_cidade() + ", getEstado()=" + getEstado() + ", getNome()=" + getNome()
-				+ ", getCep()=" + getCep() + "]";
+		return "Cidade [id_cidade=" + id_cidade + ", nome=" + nome + ", cep=" + cep + ", estado=" + estado.toString() + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((id_cidade == null) ? 0 : id_cidade.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cidade other = (Cidade) obj;
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (estado == null) {
+			if (other.estado != null)
+				return false;
+		} else if (!estado.equals(other.estado))
+			return false;
+		if (id_cidade == null) {
+			if (other.id_cidade != null)
+				return false;
+		} else if (!id_cidade.equals(other.id_cidade))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}	
 	
 	
 }

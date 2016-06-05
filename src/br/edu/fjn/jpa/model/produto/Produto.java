@@ -44,6 +44,10 @@ public class Produto {
 	
 	}
 	
+	public void setId_produto(Integer id_produto) {
+		this.id_produto = id_produto;
+	}
+
 	public Integer getId_produto() {
 		return id_produto;
 	}
@@ -112,6 +116,14 @@ public class Produto {
 		this.imagem = imagem;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "Produto [id_produto=" + id_produto + ", estoque=" + estoque + ", descricao=" + descricao + ", preco="
+				+ preco + ", tecnologia=" + tecnologia + ", genero=" + genero + ", modelo=" + modelo.toString() + ", cor=" + cor
+				+ ", imagem=" + imagem + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -177,14 +189,9 @@ public class Produto {
 		if (tecnologia != other.tecnologia)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Produto [id_produto=" + id_produto + ", estoque=" + estoque + ", descricao=" + descricao + ", preco="
-				+ preco + ", tecnologia=" + tecnologia + ", genero=" + genero + ", modelo=" + modelo + ", cor=" + cor
-				+ ", imagem=" + imagem + "]";
 	}	
+	
+	
 	
 	
 }

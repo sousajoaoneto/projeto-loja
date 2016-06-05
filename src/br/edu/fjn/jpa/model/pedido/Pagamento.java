@@ -36,6 +36,10 @@ public class Pagamento {
 		this.parcelamento = parcelamento;
 	}
 
+	public void setId_pagamento(Integer id_pagamento) {
+		this.id_pagamento = id_pagamento;
+	}
+
 	public Integer getId_pagamento() {
 		return id_pagamento;
 	}
@@ -64,8 +68,49 @@ public class Pagamento {
 		this.parcelamento = parcelamento;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Pagamento [id_pagamento=" + id_pagamento + ", status_pagamento=" + status_pagamento
+				+ ", forma_pagamento=" + forma_pagamento + ", parcelamento=" + parcelamento + "]";
+	}
 
+	//hash and equals
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((forma_pagamento == null) ? 0 : forma_pagamento.hashCode());
+		result = prime * result + ((id_pagamento == null) ? 0 : id_pagamento.hashCode());
+		result = prime * result + ((parcelamento == null) ? 0 : parcelamento.hashCode());
+		result = prime * result + (status_pagamento ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pagamento other = (Pagamento) obj;
+		if (forma_pagamento != other.forma_pagamento)
+			return false;
+		if (id_pagamento == null) {
+			if (other.id_pagamento != null)
+				return false;
+		} else if (!id_pagamento.equals(other.id_pagamento))
+			return false;
+		if (parcelamento == null) {
+			if (other.parcelamento != null)
+				return false;
+		} else if (!parcelamento.equals(other.parcelamento))
+			return false;
+		if (status_pagamento != other.status_pagamento)
+			return false;
+		return true;
+	}	
 	
 	
 }

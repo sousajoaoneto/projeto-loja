@@ -20,8 +20,18 @@ public class Modelo {
 	
 	public Modelo(){
 		
-	}
+	}	
 	
+	public Modelo(String descricao) {
+		super();
+		this.descricao = descricao;
+	}
+
+
+	public void setId_modelo(Integer id_modelo) {
+		this.id_modelo = id_modelo;
+	}
+
 	public Integer getId_modelo() {
 		return id_modelo;
 	}
@@ -32,8 +42,14 @@ public class Modelo {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}	
+
+	@Override
+	public String toString() {
+		return "Modelo [id_modelo=" + id_modelo + ", descricao=" + descricao + "]";
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,13 +80,6 @@ public class Modelo {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Modelo [getId_modelo()=" + getId_modelo() + ", getDescricao()=" + getDescricao() + ", hashCode()="
-				+ hashCode() + "]";
-	}
-	
 	
 	
 	

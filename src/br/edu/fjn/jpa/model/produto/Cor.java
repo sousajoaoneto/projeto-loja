@@ -21,7 +21,16 @@ public class Cor {
 	public Cor(){
 		
 	}
-	
+		
+	public Cor(String descricao) {
+		super();
+		this.descricao = descricao;
+	}
+
+	public void setId_cor(Integer id_cor) {
+		this.id_cor = id_cor;
+	}
+
 	public Integer getId_cor() {
 		return id_cor;
 	}
@@ -34,6 +43,12 @@ public class Cor {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+		return "Cor [getId_cor()=" + getId_cor() + ", getDescricao()=" + getDescricao() + ", hashCode()=" + hashCode()
+				+ "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,13 +79,5 @@ public class Cor {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Cor [getId_cor()=" + getId_cor() + ", getDescricao()=" + getDescricao() + ", hashCode()=" + hashCode()
-				+ "]";
-	}
-	
-	
 	 
 }

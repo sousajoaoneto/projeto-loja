@@ -20,16 +20,20 @@ public class LoginController {
 	@Inject
 	private UserSession userSession;
 	
+	@Inject
+	private DaoUsuario daoUsuario;
+	
 	@Public
 	@Get("entrar")
 	public void form(){
+		result.include("pageTitle", "Entrar");
 		// chama login/form.jsp
 	}
 	
 	@Public
 	@Post("autenticar")
 	public void auth(Usuario usuario){
-		Usuario achado = new DaoUsuario().findToAuth(usuario.getEmail(),usuario.getSenha());
+		Usuario achado = daoUsuario.findToAuth(usuario.getEmail(),usuario.getSenha());
 		
 		//fa autencicação
 		if( achado!=null ){
@@ -41,7 +45,7 @@ public class LoginController {
 		}
 	}
 	
-	@Public
+	
 	@Get("sair")
 	public void loggout(){
 		userSession.loggout();

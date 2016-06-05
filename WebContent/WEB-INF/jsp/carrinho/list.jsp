@@ -19,8 +19,9 @@
 		                <li class="item" data-item="0">
 		                    <a href="${pageContext.request.contextPath}/carrinho/remover/${s.index}" class="pull-right remove"><span class="glyphicon glyphicon-remove"></span></a>
 		                    <img src="${item.produto.imagem}" class="item-img" />
-		                    <p class="item-title">${item.produto.descricao}</p> <span class="badge item-price"><fmt:formatNumber type="currency"
-value="${item.produto.preco}" currencySymbol="R$"/></span>
+		                    <p class="item-title">${item.produto.descricao}</p> <span class="badge item-price">
+		                    <fmt:formatNumber type="currency" value="${item.produto.preco}" currencySymbol="R$"/>
+		                    </span>
 							 <span class="badge bg-info item-qtd">Qtd ${item.quantidade}</span>
 		                </li>
 	                </c:forEach>

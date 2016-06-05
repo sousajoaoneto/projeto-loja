@@ -32,14 +32,12 @@ public class DaoPedido implements DaoInterfacePedido {
 	public boolean salvar(Pedido pedido) {
 		
 		EntityManager em = FabricaDeConexao.getManager();
-		//pedido.getUsuario().setId_usuario(1);
 		try {
 			em.getTransaction().begin();
 			em.persist(pedido);
 			em.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			System.out.println(pedido.getUsuario().toString());
 			e.printStackTrace();
 			return false;
 		}finally {
